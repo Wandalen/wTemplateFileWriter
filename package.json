@@ -21,7 +21,9 @@
     "url": "https://github.com/Wandalen/wTemplateFileWriter/issues"
   },
   "dependencies": {
-    "wTools": ""
+    "wTools": "",
+    "wtemplatetreeresolver": "",
+    "wFiles" : ""
   },
   "devDependencies": {
     "wTesting": "",
