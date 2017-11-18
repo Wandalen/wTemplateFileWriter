@@ -1,0 +1,33 @@
+
+{
+  "name": "wTemplateFileWriter",
+  "version": "0.3.1",
+  "description": "",
+  "author": "Kostiantyn Wandalen <wtory.net@domainsbyproxy.com>",
+  "license": "MIT",
+  "main": "staging/dwtools/amid/file/FileTop.s",
+  "files": [
+    "staging/dwtools/amid",
+    "production"
+  ],
+  "scripts": {
+    "test": "wtest staging",
+    "make_doc": "./doc.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Wandalen/wTemplateFileWriter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Wandalen/wTemplateFileWriter/issues"
+  },
+  "dependencies": {
+    "wTools": ""
+  },
+  "devDependencies": {
+    "wTesting": ""
+  },
+  "keywords": [
+    "wTools"
+  ]
+}
