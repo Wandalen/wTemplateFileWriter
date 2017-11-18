@@ -93,7 +93,6 @@ function form()
 
   if( !self.resolver )
   self.resolver = wTemplateTreeResolver();
-  debugger;
   self.resolver.tree = config;
 
   var templateResolved = self.resolver.resolve( self.template );
@@ -119,7 +118,9 @@ function nameGet()
 function configGet()
 {
   var self = this;
-  return { package : { name : self.nameGet() } };
+  var name = self.nameGet();
+  var result = { package : { name : name, nameLowerCased : name.toLowerCase() } };
+  return result;
 }
 
 //
