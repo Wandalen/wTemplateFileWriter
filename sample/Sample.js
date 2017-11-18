@@ -1,7 +1,10 @@
 
 if( typeof module !== 'undefined' )
-require( 'wTools' );
-require( 'wtemplatefilewriter' );
+{
+  require( 'wTools' );
+  require( 'wtemplatefilewriter' );
+}
+
 var _ = wTools;
 
 var template =

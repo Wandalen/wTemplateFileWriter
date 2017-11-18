@@ -110,6 +110,8 @@ function form()
 function nameGet()
 {
   var self = this;
+  if( self.name !== null && self.name !== undefined )
+  return self.name;
   return _.pathName( self.currentPath );
 }
 
@@ -140,6 +142,7 @@ var Composes =
 {
   currentPath : null,
   templateFilePath : null,
+  name : null,
 }
 
 var Associates =
