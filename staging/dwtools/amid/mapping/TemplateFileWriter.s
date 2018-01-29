@@ -5,17 +5,24 @@
 if( typeof module !== 'undefined' )
 {
 
-  if( typeof wBase === 'undefined' )
-  try
+  if( typeof _global_ === 'undefined' || !_global_.wBase )
   {
-    require( '../include/dwtools/Base.s' );
-  }
-  catch( err )
-  {
-    require( 'wTools' );
+    let toolsPath = '../../../dwtools/Base.s';
+    let toolsExternal = 0;
+    try
+    {
+      require.resolve( toolsPath )/*hhh*/;
+    }
+    catch( err )
+    {
+      toolsExternal = 1;
+      require( 'wTools' );
+    }
+    if( !toolsExternal )
+    require( toolsPath )/*hhh*/;
   }
 
-  var _ = wTools;
+  var _ = _global_.wTools;
 
   _.include( 'wCopyable' );
   _.include( 'wFiles' );
@@ -23,7 +30,7 @@ if( typeof module !== 'undefined' )
 
 }
 
-var _ = wTools;
+var _ = _global_.wTools;
 var Parent = null;
 var Self = function wTemplateFileWriter( o )
 {
@@ -73,12 +80,7 @@ function form()
   {
     try
     {
-
-      if( !self.templateFilePath )
-      self.templateFilePath = _.pathResolve( self.currentPath,'./Template.s' );
-      else
-      self.templateFilePath = _.pathResolve( self.currentPath,self.templateFilePath );
-
+      self.templateFilePath = _.pathResolve( self.currentPath,self.templateFilePath || './Template.s' );
       self.template = require( self.templateFilePath );
     }
     catch( err )
@@ -194,14 +196,15 @@ _.classMake
   extend : Proto,
 });
 
-wCopyable.mixin( Self );
+_.Copyable.mixin( Self );
 
 //
 
-wTools[ Self.nameShort ] = _global_[ Self.name ] = Self;
+_[ Self.nameShort ] = _global_[ Self.name ] = Self;
 if( typeof module !== 'undefined' )
 module[ 'exports' ] = Self;
 
+if( typeof module !== 'undefined' )
 if( !module.parent )
 Self.exec();
 
