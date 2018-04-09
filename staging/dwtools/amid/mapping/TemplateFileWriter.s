@@ -61,6 +61,9 @@ function init( o )
   if( o )
   self.copy( o );
 
+  if( !self.fileProvider )
+  self.fileProvider = _.fileProvider;
+
 }
 
 //
@@ -72,7 +75,12 @@ function form()
   _.assert( arguments.length === 0 );
 
   if( !self.currentPath )
-  self.currentPath = _.pathCurrent();
+  self.currentPath = self.fileProvider.pathCurrent();
+
+  if( !self.basePath )
+  self.basePath = '.';
+
+  self.basePath = self.fileProvider.pathResolve( self.currentPath, self.basePath );
 
   // var mainDirPath = _.pathEffectiveMainDir();
 
@@ -80,8 +88,8 @@ function form()
   {
     try
     {
-      self.templateFilePath = _.pathResolve( self.currentPath,self.templateFilePath || './Template.s' );
-      self.template = require( self.templateFilePath );
+      self.templateFilePath = self.fileProvider.pathResolve( self.currentPath, self.templateFilePath || './Template.s' );
+      self.template = require( _.pathNativize( self.templateFilePath ) );
     }
     catch( err )
     {
@@ -94,15 +102,18 @@ function form()
   var config = self.configGet();
 
   if( !self.resolver )
-  self.resolver = wTemplateTreeResolver();
+  self.resolver = _.TemplateTreeResolver();
   self.resolver.tree = config;
 
-  var templateResolved = self.resolver.resolve( self.template );
+  self.templateResolved = self.resolver.resolve( self.template );
+  self.templateProvider = new _.FileProvider.SimpleStructure({ filesTree : self.templateResolved });
 
-  _.fileProvider.filesTreeWrite
+  self.templateProvider.readToProvider
   ({
-    filePath : self.currentPath,
-    filesTree : templateResolved,
+    dstProvider : _.fileProvider,
+    dstPath : self.currentPath,
+    basePath : self.basePath,
+    allowDeleteForRelinking : 1,
   });
 
 }
@@ -143,18 +154,24 @@ function exec()
 var Composes =
 {
   currentPath : null,
+  basePath : null,
   templateFilePath : null,
   name : null,
 }
 
 var Associates =
 {
+  fileProvider : null,
   resolver : null,
   template : null,
+  templateResolved : null,
 }
 
 var Restricts =
 {
+
+  templateProvider : null,
+
 }
 
 var Statics =
