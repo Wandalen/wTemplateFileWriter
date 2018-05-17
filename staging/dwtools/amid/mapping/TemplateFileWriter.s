@@ -106,7 +106,7 @@ function form()
   self.resolver.tree = config;
 
   self.templateResolved = self.resolver.resolve( self.template );
-  self.templateProvider = new _.FileProvider.SimpleStructure({ filesTree : self.templateResolved });
+  self.templateProvider = new _.FileProvider.Extract({ filesTree : self.templateResolved });
 
   self.templateProvider.readToProvider
   ({
