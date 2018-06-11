@@ -30,6 +30,9 @@ if( typeof module !== 'undefined' )
 
 }
 
+//
+
+var _global = _global_;
 var _ = _global_.wTools;
 var Parent = null;
 var Self = function wTemplateFileWriter( o )
@@ -216,6 +219,10 @@ _.classMake
 _.Copyable.mixin( Self );
 
 //
+
+if( typeof module !== 'undefined' )
+if( _global_.WTOOLS_PRIVATE )
+delete require.cache[ module.id ];
 
 _[ Self.nameShort ] = _global_[ Self.name ] = Self;
 if( typeof module !== 'undefined' )
