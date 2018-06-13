@@ -183,7 +183,7 @@ var Statics =
 }
 
 // --
-// proto
+// define class
 // --
 
 var Proto =
