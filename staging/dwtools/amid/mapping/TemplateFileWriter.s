@@ -199,7 +199,7 @@ var Proto =
 
   // relations
 
-  constructor : Self,
+  /* constructor * : * Self, */
   Composes : Composes,
   Associates : Associates,
   Restricts : Restricts,
