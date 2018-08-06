@@ -85,14 +85,14 @@ function form()
 
   self.basePath = self.fileProvider.pathResolve( self.currentPath, self.basePath );
 
-  // var mainDirPath = _.pathEffectiveMainDir();
+  // var mainDirPath = _.path.pathEffectiveMainDir();
 
   if( self.template === null )
   {
     try
     {
       self.templateFilePath = self.fileProvider.pathResolve( self.currentPath, self.templateFilePath || './Template.s' );
-      self.template = require( _.pathNativize( self.templateFilePath ) );
+      self.template = require( _.path.pathNativize( self.templateFilePath ) );
     }
     catch( err )
     {
@@ -128,7 +128,7 @@ function nameGet()
   var self = this;
   if( self.name !== null && self.name !== undefined )
   return self.name;
-  return _.pathName( self.currentPath );
+  return _.path.pathName( self.currentPath );
 }
 
 //
@@ -199,7 +199,7 @@ var Proto =
 
   // relations
 
-  /* constructor * : * Self, */
+  
   Composes : Composes,
   Associates : Associates,
   Restricts : Restricts,
