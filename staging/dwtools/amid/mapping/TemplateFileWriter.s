@@ -78,21 +78,21 @@ function form()
   _.assert( arguments.length === 0 );
 
   if( !self.currentPath )
-  self.currentPath = self.fileProvider.pathCurrent();
+  self.currentPath = self.fileProvider.current();
 
   if( !self.basePath )
   self.basePath = '.';
 
-  self.basePath = self.fileProvider.pathResolve( self.currentPath, self.basePath );
+  self.basePath = self.fileProvider.resolve( self.currentPath, self.basePath );
 
-  // var mainDirPath = _.path.pathEffectiveMainDir();
+  // var mainDirPath = _.path.effectiveMainDir();
 
   if( self.template === null )
   {
     try
     {
-      self.templateFilePath = self.fileProvider.pathResolve( self.currentPath, self.templateFilePath || './Template.s' );
-      self.template = require( _.path.pathNativize( self.templateFilePath ) );
+      self.templateFilePath = self.fileProvider.resolve( self.currentPath, self.templateFilePath || './Template.s' );
+      self.template = require( _.path.nativize( self.templateFilePath ) );
     }
     catch( err )
     {
@@ -128,7 +128,7 @@ function nameGet()
   var self = this;
   if( self.name !== null && self.name !== undefined )
   return self.name;
-  return _.path.pathName( self.currentPath );
+  return _.path.name( self.currentPath );
 }
 
 //
@@ -209,7 +209,7 @@ var Proto =
 
 // define
 
-_.classMake
+_.classDeclare
 ({
   cls : Self,
   parent : Parent,
