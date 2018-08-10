@@ -22,7 +22,7 @@ if( typeof module !== 'undefined' )
     require( toolsPath );
   }
 
-  var _ = _global_.wTools;
+  let _ = _global_.wTools;
 
   _.include( 'wCopyable' );
   _.include( 'wFiles' );
@@ -32,10 +32,10 @@ if( typeof module !== 'undefined' )
 
 //
 
-var _global = _global_;
-var _ = _global_.wTools;
-var Parent = null;
-var Self = function wTemplateFileWriter( o )
+let _global = _global_;
+let _ = _global_.wTools;
+let Parent = null;
+let Self = function wTemplateFileWriter( o )
 {
   return _.instanceConstructor( Self, this, arguments );
 }
@@ -48,7 +48,7 @@ Self.shortName = 'TemplateFileWriter';
 
 function init( o )
 {
-  var self = this;
+  let self = this;
 
   _.assert( arguments.length === 0 || arguments.length === 1 );
   _.instanceInit( self );
@@ -68,7 +68,7 @@ function init( o )
 
 function form()
 {
-  var self = this;
+  let self = this;
 
   _.assert( arguments.length === 0 );
 
@@ -80,7 +80,7 @@ function form()
 
   self.basePath = self.fileProvider.resolve( self.currentPath, self.basePath );
 
-  // var mainDirPath = _.path.effectiveMainDir();
+  // let mainDirPath = _.path.effectiveMainDir();
 
   if( self.template === null )
   {
@@ -94,10 +94,10 @@ function form()
       _.errLogOnce( err );
     }
     if( !self.template )
-    throw _.errLogOnce( 'Cant find template at',_.strQuote( self.templateFilePath ) );
+    throw _.errLogOnce( 'Cant read template', _.strQuote( self.templateFilePath ) );
   }
 
-  var config = self.configGet();
+  let config = self.configGet();
 
   if( !self.resolver )
   self.resolver = _.TemplateTreeResolver();
@@ -120,7 +120,7 @@ function form()
 
 function nameGet()
 {
-  var self = this;
+  let self = this;
   if( self.name !== null && self.name !== undefined )
   return self.name;
   return _.path.name( self.currentPath );
@@ -130,9 +130,16 @@ function nameGet()
 
 function configGet()
 {
-  var self = this;
-  var name = self.nameGet();
-  var result = { package : { name : name, nameLowerCased : name.toLowerCase() } };
+  let self = this;
+  let result = Object.create( null );
+
+  let name = self.nameGet();
+  let lowName = name.toLowerCase();
+  let shortName = name;
+  if( /^w[A-Z]/.test( shortName ) )
+  shortName = shortName.substring( 1 );
+
+  result.package = { name : name, lowName : lowName, shortName : shortName, };
   return result;
 }
 
@@ -140,7 +147,7 @@ function configGet()
 
 function exec()
 {
-  var self = new this.Self();
+  let self = new this.Self();
   self.form();
   return self;
 }
@@ -149,7 +156,7 @@ function exec()
 // relations
 // --
 
-var Composes =
+let Composes =
 {
   currentPath : null,
   basePath : null,
@@ -157,7 +164,7 @@ var Composes =
   name : null,
 }
 
-var Associates =
+let Associates =
 {
   fileProvider : null,
   resolver : null,
@@ -165,23 +172,23 @@ var Associates =
   templateResolved : null,
 }
 
-var Restricts =
+let Restricts =
 {
 
   templateProvider : null,
 
 }
 
-var Statics =
+let Statics =
 {
   exec : exec,
 }
 
 // --
-// define class
+// declare
 // --
 
-var Proto =
+let Proto =
 {
 
   init : init,
@@ -194,7 +201,7 @@ var Proto =
 
   // relations
 
-  
+
   Composes : Composes,
   Associates : Associates,
   Restricts : Restricts,
