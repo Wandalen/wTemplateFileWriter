@@ -118,6 +118,14 @@ function form()
 
 //
 
+function exec()
+{
+  let self = new this.Self();
+  self.form();
+  return self;
+}
+//
+
 function nameGet()
 {
   let self = this;
@@ -131,25 +139,28 @@ function nameGet()
 function configGet()
 {
   let self = this;
-  let result = Object.create( null );
-
-  let name = self.nameGet();
-  let lowName = name.toLowerCase();
-  let shortName = name;
-  if( /^w[A-Z]/.test( shortName ) )
-  shortName = shortName.substring( 1 );
-
-  result.package = { name : name, lowName : lowName, shortName : shortName, };
+  let result = self.onConfigGet();
   return result;
 }
 
 //
 
-function exec()
+function onConfigGet()
 {
-  let self = new this.Self();
-  self.form();
-  return self;
+  let self = this;
+  let result = Object.create( null );
+
+  let name = self.nameGet();
+  let lowName = name.toLowerCase();
+  let highName = name.toUpperCase();
+  let shortName = name;
+  if( /^w[A-Z]/.test( shortName ) )
+  shortName = shortName.substring( 1 );
+
+  self.onConfigName();
+
+  result.package = { name : name, lowName : lowName, highName : highName, shortName : shortName, };
+  return result;
 }
 
 // --
@@ -166,10 +177,14 @@ let Composes =
 
 let Associates =
 {
+
   fileProvider : null,
   resolver : null,
   template : null,
   templateResolved : null,
+
+  onConfigGet : null,
+
 }
 
 let Restricts =
@@ -193,14 +208,12 @@ let Proto =
 
   init : init,
   form : form,
+  exec : exec,
 
   nameGet : nameGet,
   configGet : configGet,
 
-  exec : exec,
-
   // relations
-
 
   Composes : Composes,
   Associates : Associates,
