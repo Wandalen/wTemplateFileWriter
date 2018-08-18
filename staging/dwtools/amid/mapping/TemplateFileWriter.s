@@ -148,18 +148,12 @@ function configGet()
 function onConfigGet()
 {
   let self = this;
-  let result = Object.create( null );
 
   let name = self.nameGet();
   let lowName = name.toLowerCase();
   let highName = name.toUpperCase();
-  let shortName = name;
-  if( /^w[A-Z]/.test( shortName ) )
-  shortName = shortName.substring( 1 );
 
-  self.onConfigName();
-
-  result.package = { name : name, lowName : lowName, highName : highName, shortName : shortName, };
+  let result = { name : name, lowName : lowName, highName : highName, shortName : shortName, };
   return result;
 }
 
