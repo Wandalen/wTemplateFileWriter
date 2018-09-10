@@ -87,7 +87,7 @@ function form()
     try
     {
       self.templateFilePath = self.fileProvider.pathResolve( self.currentPath, self.templateFilePath || './Template.s' );
-      self.template = require( _.path.pathNativize( self.templateFilePath ) );
+      self.template = require( _.path.path.nativize( self.templateFilePath ) );
     }
     catch( err )
     {
