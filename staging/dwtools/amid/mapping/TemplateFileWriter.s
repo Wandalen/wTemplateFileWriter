@@ -78,7 +78,7 @@ function form()
   if( !self.basePath )
   self.basePath = '.';
 
-  self.basePath = self.fileProvider.pathResolve( self.currentPath, self.basePath );
+  self.basePath = self.fileProvider.path.resolve( self.currentPath, self.basePath );
 
   // let mainDirPath = _.path.effectiveMainDir();
 
@@ -86,7 +86,7 @@ function form()
   {
     try
     {
-      self.templateFilePath = self.fileProvider.pathResolve( self.currentPath, self.templateFilePath || './Template.s' );
+      self.templateFilePath = self.fileProvider.path.resolve( self.currentPath, self.templateFilePath || './Template.s' );
       self.template = require( _.path.path.nativize( self.templateFilePath ) );
     }
     catch( err )
