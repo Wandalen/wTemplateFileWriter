@@ -7,7 +7,7 @@
   "main": "proto/dwtools/amid/amapping/TemplateFileWriter.s",
   "files": [
     "proto/dwtools/amid",
-    "production"
+    "proto/dwtools/Tools.s", "production"
   ],
   "scripts": {
     "test": "wtest staging",
