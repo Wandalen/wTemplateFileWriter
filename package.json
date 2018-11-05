@@ -4,14 +4,14 @@
   "description": "Write template to the file system, instantiating it. ",
   "author": "Kostiantyn Wandalen <wanalen@willbe.so>",
   "license": "MIT",
-  "main": "staging/dwtools/amid/amapping/TemplateFileWriter.s",
+  "main": "proto/dwtools/amid/amapping/TemplateFileWriter.s",
   "files": [
-    "staging/dwtools/amid",
+    "proto/dwtools/amid",
     "production"
   ],
   "scripts": {
     "test": "wtest staging",
-    "make_doc": "./doc.sh"
+    "docgen": "wdocgen proto"
   },
   "repository": {
     "type": "git",
