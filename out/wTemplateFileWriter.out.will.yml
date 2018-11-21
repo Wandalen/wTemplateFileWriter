@@ -1,8 +1,8 @@
 format: willfile-1.0.0
 about:
   name: wTemplateFileWriter
-  description: 'Write template to the file system, instantiating it.'
-  version: 0.3.40
+  description: 'Write template to the file system, instantiating it. '
+  version: 0.3.41
   enabled: 1
   interpreters:
     - nodejs >= 6.0.0
@@ -266,7 +266,7 @@ build:
       - 'step::export.proto'
 exported:
   proto.export:
-    version: 0.3.40
+    version: 0.3.41
     criterion:
       default: 1
       debug: 1
