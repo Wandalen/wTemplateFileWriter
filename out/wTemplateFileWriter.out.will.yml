@@ -2,7 +2,7 @@ format: willfile-1.0.0
 about:
   name: wTemplateFileWriter
   description: 'Write template to the file system, instantiating it. '
-  version: 0.3.41
+  version: 0.3.42
   enabled: 1
   interpreters:
     - nodejs >= 6.0.0
@@ -77,7 +77,7 @@ path:
 submodule: {}
 reflector:
   reflect.proto.0:
-    reflectMap:
+    filePath:
       ./proto: ./out.release
     srcFilter:
       maskAll:
@@ -101,7 +101,7 @@ reflector:
     inherit:
       - predefined.*
   reflect.proto.1:
-    reflectMap:
+    filePath:
       ./proto: ./out.debug
     srcFilter:
       maskAll:
@@ -147,15 +147,14 @@ reflector:
     inherit:
       - predefined.*
   exported.0:
-    reflectMap:
-      ./proto: true
+    filePath: ./proto
     srcFilter:
       prefixPath: .
     dstFilter:
       prefixPath: .
   exportedFiles.0:
     recursive: 0
-    reflectMap:
+    filePath:
       ./dwtools/Tools.s: true
       ./dwtools/amid/mapping/.DS_Store: true
       ./dwtools/amid/mapping/TemplateFileWriter.s: true
@@ -266,7 +265,7 @@ build:
       - 'step::export.proto'
 exported:
   proto.export:
-    version: 0.3.41
+    version: 0.3.42
     criterion:
       default: 1
       debug: 1
