@@ -4,9 +4,9 @@
   "description": "Write template to the file system, instantiating it. ",
   "author": "Kostiantyn Wandalen <wanalen@willbe.so>",
   "license": "MIT",
-  "main": "proto/dwtools/amid/amapping/TemplateFileWriter.s",
+  "main": "proto/dwtools/amid/l5_mapper/TemplateFileWriter.s",
   "files": [
-    "proto/dwtools/amid",
+    "proto/dwtools/amid/l5_mapper",
     "proto/dwtools/Tools.s",
     "production"
   ],
