@@ -51,9 +51,8 @@ path:
       - ./dwtools/Tools.s
       - ./dwtools/abase
       - ./dwtools/amid
-      - ./dwtools/amid/mapping
-      - ./dwtools/amid/mapping/.DS_Store
-      - ./dwtools/amid/mapping/TemplateFileWriter.s
+      - ./dwtools/amid/l5_mapper
+      - ./dwtools/amid/l5_mapper/TemplateFileWriter.s
       - ./dwtools/atop
     criterion:
       default: 1
@@ -65,8 +64,7 @@ path:
   exportedTerminals.0:
     path:
       - ./dwtools/Tools.s
-      - ./dwtools/amid/mapping/.DS_Store
-      - ./dwtools/amid/mapping/TemplateFileWriter.s
+      - ./dwtools/amid/l5_mapper/TemplateFileWriter.s
     criterion:
       default: 1
       debug: 1
@@ -156,8 +154,7 @@ reflector:
     recursive: 0
     filePath:
       ./dwtools/Tools.s: true
-      ./dwtools/amid/mapping/.DS_Store: true
-      ./dwtools/amid/mapping/TemplateFileWriter.s: true
+      ./dwtools/amid/l5_mapper/TemplateFileWriter.s: true
     srcFilter:
       basePath: .
       prefixPath: proto
@@ -280,8 +277,7 @@ exported:
     exportedTerminalsPath:
       path:
         - ./dwtools/Tools.s
-        - ./dwtools/amid/mapping/.DS_Store
-        - ./dwtools/amid/mapping/TemplateFileWriter.s
+        - ./dwtools/amid/l5_mapper/TemplateFileWriter.s
       criterion:
         default: 1
         debug: 1
