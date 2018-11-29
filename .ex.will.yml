@@ -3,7 +3,7 @@ about :
 
   name : "wTemplateFileWriter"
   description : "Write template to the file system, instantiating it. "
-  version : "0.3.42"
+  version : "0.3.46"
   enabled : 1
   interpreters :
   - nodejs >= 6.0.0
@@ -43,6 +43,7 @@ build :
       proto : 1
       export : 1
       tar : 1
+      public : 1
     steps :
       - build::debug.raw
       - step::export.proto
