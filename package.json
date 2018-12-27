@@ -27,8 +27,7 @@
     "wFiles": ""
   },
   "devDependencies": {
-    "wTesting": "",
-    "wtemplatefilewriter": "."
+    "wTesting": ""
   },
   "keywords": [
     "wTools",
