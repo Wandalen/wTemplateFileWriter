@@ -101,7 +101,7 @@ function form()
 
 //
 
-function exec()
+function Exec()
 {
   let self = new this.Self();
   self.form();
@@ -173,7 +173,7 @@ let Restricts =
 
 let Statics =
 {
-  exec : exec,
+  Exec,
 }
 
 // --
@@ -183,19 +183,19 @@ let Statics =
 let Proto =
 {
 
-  init : init,
-  form : form,
-  exec : exec,
+  init,
+  form,
+  Exec,
 
-  nameGet : nameGet,
-  configGet : configGet,
+  nameGet,
+  configGet,
 
   // relations
 
-  Composes : Composes,
-  Associates : Associates,
-  Restricts : Restricts,
-  Statics : Statics,
+  Composes,
+  Associates,
+  Restricts,
+  Statics,
 
 }
 
@@ -222,6 +222,6 @@ module[ 'exports' ] = Self;
 
 if( typeof module !== 'undefined' )
 if( !module.parent )
-Self.exec();
+Self.Exec();
 
 })();
