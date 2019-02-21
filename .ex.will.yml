@@ -4,7 +4,7 @@ about :
 
   name : "wTemplateFileWriter"
   description : "Write template to the file system, instantiating it. "
-  version : "0.3.56"
+  version : "0.3.58"
   enabled : 1
   interpreters :
   - nodejs >= 6.0.0
