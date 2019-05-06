@@ -21,8 +21,8 @@ execution :
 
 path :
 
-  repository : git+https://github.com/Wandalen/wTemplateFileWriter.git
-  bugs : https://github.com/Wandalen/wTemplateFileWriter/issues
+  repository : git+https:///github.com/Wandalen/wTemplateFileWriter.git
+  bugs : https:///github.com/Wandalen/wTemplateFileWriter/issues
 
 step :
 
