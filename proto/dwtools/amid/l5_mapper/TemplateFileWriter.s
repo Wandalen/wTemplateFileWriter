@@ -2,6 +2,17 @@
 
 'use strict';
 
+/*
+qqq :
+- implement tests for TemplateFileWriter
+- Use the module in Filer
+- Add commands to filer:
+.extract.read {-src-}
+.extract.select {-terminal-}
+.extract.write {-dst-}
+might be glob
+*/
+
 if( typeof module !== 'undefined' )
 {
 
@@ -20,7 +31,7 @@ let _ = _global_.wTools;
 let Parent = null;
 let Self = function wTemplateFileWriter( o )
 {
-  return _.instanceConstructor( Self, this, arguments );
+  return _.workpiece.construct( Self, this, arguments );
 }
 
 Self.shortName = 'TemplateFileWriter';
@@ -34,7 +45,7 @@ function init( o )
   let self = this;
 
   _.assert( arguments.length === 0 || arguments.length === 1 );
-  _.instanceInit( self );
+  _.workpiece.initFields( self );
 
   if( self.constructor === Self )
   Object.preventExtensions( self );
@@ -56,12 +67,12 @@ function form()
   _.assert( arguments.length === 0 );
 
   if( !self.currentPath )
-  self.currentPath = self.fileProvider.current();
+  self.currentPath = self.fileProvider.path.current();
 
-  if( !self.basePath )
-  self.basePath = '.';
-
-  self.basePath = self.fileProvider.path.resolve( self.currentPath, self.basePath );
+  // if( !self.basePath )
+  // self.basePath = '.';
+  //
+  // self.basePath = self.fileProvider.path.resolve( self.currentPath, self.basePath );
 
   // let mainDirPath = _.path.effectiveMainDir();
 
@@ -89,13 +100,22 @@ function form()
   self.templateResolved = self.resolver.resolve( self.template );
   self.templateProvider = new _.FileProvider.Extract({ filesTree : self.templateResolved });
 
-  self.templateProvider.readToProvider
+  self.templateProvider.filesReflectTo
   ({
     dstProvider : _.fileProvider,
     dstPath : self.currentPath,
-    basePath : self.basePath,
-    allowDeleteForRelinking : 1,
+    dstRewriting : 0,
+    // basePath : self.basePath,
+    // allowDeleteForRelinking : 1,
   });
+
+  // self.templateProvider.readToProvider
+  // ({
+  //   dstProvider : _.fileProvider,
+  //   dstPath : self.currentPath,
+  //   basePath : self.basePath,
+  //   allowDeleteForRelinking : 1,
+  // });
 
 }
 
@@ -136,7 +156,7 @@ function onConfigGet()
   let lowName = name.toLowerCase();
   let highName = name.toUpperCase();
 
-  let result = { name : name, lowName : lowName, highName : highName, shortName : shortName, };
+  let result = { name : name, lowName : lowName, highName : highName };
   return result;
 }
 
@@ -147,7 +167,7 @@ function onConfigGet()
 let Composes =
 {
   currentPath : null,
-  basePath : null,
+  // basePath : null,
   templateFilePath : null,
   name : null,
 }
@@ -160,7 +180,7 @@ let Associates =
   template : null,
   templateResolved : null,
 
-  onConfigGet : null,
+  onConfigGet : onConfigGet,
 
 }
 
@@ -212,9 +232,9 @@ _.Copyable.mixin( Self );
 
 //
 
-if( typeof module !== 'undefined' )
-if( _global_.WTOOLS_PRIVATE )
-{ /* delete require.cache[ module.id ]; */ }
+// if( typeof module !== 'undefined' )
+// if( _global_.WTOOLS_PRIVATE )
+// { /* delete require.cache[ module.id ]; */ }
 
 _[ Self.shortName ] = _global_[ Self.name ] = Self;
 if( typeof module !== 'undefined' )
