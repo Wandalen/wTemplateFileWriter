@@ -1,13 +1,12 @@
-
 {
   "name": "wtemplatefilewriter",
-  "version": "0.3.0",
-  "description": "___",
+  "version": "0.3.72",
+  "description": "Write template to the file system, instantiating it. ",
   "author": "Kostiantyn Wandalen <wanalen@willbe.so>",
   "license": "MIT",
-  "main": "proto/dwtools/amid/___",
+  "main": "proto/dwtools/amid/l5_mapper/TemplateFileWriter.s",
   "files": [
-    "proto/dwtools/amid",
+    "proto/dwtools/amid/l5_mapper",
     "proto/dwtools/Tools.s",
     "production"
   ],
@@ -23,12 +22,17 @@
     "url": "https://github.com/Wandalen/wTemplateFileWriter/issues"
   },
   "dependencies": {
-    "wTools": ""
+    "wTools": "",
+    "wtemplatetreeresolver": "",
+    "wFiles": ""
   },
   "devDependencies": {
     "wTesting": ""
   },
   "keywords": [
-    "wTools"
+    "wTools",
+    "template",
+    "instantiating template",
+    "file system"
   ]
 }
