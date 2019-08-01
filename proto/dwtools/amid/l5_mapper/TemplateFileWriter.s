@@ -67,7 +67,7 @@ function form()
   _.assert( arguments.length === 0 );
 
   if( !self.currentPath )
-  self.currentPath = self.fileProvider.current();
+  self.currentPath = self.fileProvider.path.current();
 
   // if( !self.basePath )
   // self.basePath = '.';
@@ -156,7 +156,7 @@ function onConfigGet()
   let lowName = name.toLowerCase();
   let highName = name.toUpperCase();
 
-  let result = { name : name, lowName : lowName, highName : highName, shortName : shortName, };
+  let result = { name : name, lowName : lowName, highName : highName };
   return result;
 }
 
@@ -180,7 +180,7 @@ let Associates =
   template : null,
   templateResolved : null,
 
-  onConfigGet : null,
+  onConfigGet : onConfigGet,
 
 }
 

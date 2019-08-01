@@ -2,7 +2,7 @@
 if( typeof module !== 'undefined' )
 {
   require( 'wTools' );
-  require( 'wtemplatefilewriter' );
+  require( '..' /* 'wtemplatefilewriter' */ );
 }
 
 var _ = wTools;
