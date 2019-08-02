@@ -11,8 +11,6 @@ if( typeof module !== 'undefined' )
 
   require( '../l5_mapper/TemplateFileWriter.s' );
 
-  var waitSync = require( 'wait-sync' );
-
 }
 
 //
@@ -69,7 +67,7 @@ function templateFileWriter( test )
         'file.js' : 'console.log( "file.js" );'
       },
       'test1.txt' : 'Test file1 content',
-      'test2.txt' : '{ "file.js" : "console.log( "file.js" )" }',
+      'test2.s' : "var Self = { 'file.js' : 'file.js' }; if( typeof module !== 'undefined' ) module[ 'exports' ] = Self;",
     }
   };
 
@@ -82,7 +80,7 @@ function templateFileWriter( test )
   });
   writer.form();
   var got = provider.filesFindRecursive( { filePath : testPath + '/tmp.tmp', outputFormat : 'relative' } );
-  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  var expected = [ '.', './test1.txt', './test2.s', './folder', './folder/file.js' ];
   test.identical( got, expected );
 
   test.case = 'base test, name';
@@ -95,7 +93,7 @@ function templateFileWriter( test )
   });
   writer.form();
   var got = provider.filesFindRecursive( { filePath : testPath + '/tmp.tmp', outputFormat : 'relative' } );
-  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  var expected = [ '.', './test1.txt', './test2.s', './folder', './folder/file.js' ];
   test.identical( got, expected );
 
 
@@ -107,7 +105,7 @@ function templateFileWriter( test )
   });
   writer.form();
   var got = provider.filesFindRecursive( { filePath : provider.path.current() + '/tmp.tmp', outputFormat : 'relative' } );
-  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  var expected = [ '.', './test1.txt', './test2.s', './folder', './folder/file.js' ];
   test.identical( got, expected );
 
   test.case = 'without dstPath, name';
@@ -119,7 +117,7 @@ function templateFileWriter( test )
   });
   writer.form();
   var got = provider.filesFindRecursive( { filePath : provider.path.current() + '/tmp.tmp', outputFormat : 'relative' } );
-  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  var expected = [ '.', './test1.txt', './test2.s', './folder', './folder/file.js' ];
   test.identical( got, expected );
 
   /* srcProvider is instance of FileProvider.Extract */
@@ -138,7 +136,7 @@ function templateFileWriter( test )
   });
   writer.form();
   var got = provider.filesFindRecursive( { filePath : testPath + '/tmp.tmp', outputFormat : 'relative' } );
-  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  var expected = [ '.', './test1.txt', './test2.s', './folder', './folder/file.js' ];
   test.identical( got, expected );
 
   test.case = 'base test, name';
@@ -151,7 +149,7 @@ function templateFileWriter( test )
   });
   writer.form();
   var got = provider.filesFindRecursive( { filePath : testPath + '/tmp.tmp', outputFormat : 'relative' } );
-  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  var expected = [ '.', './test1.txt', './test2.s', './folder', './folder/file.js' ];
   test.identical( got, expected );
 
 
@@ -163,7 +161,7 @@ function templateFileWriter( test )
   });
   writer.form();
   var got = provider.filesFindRecursive( { filePath : provider.path.current() + '/tmp.tmp', outputFormat : 'relative' } );
-  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  var expected = [ '.', './test1.txt', './test2.s', './folder', './folder/file.js' ];
   test.identical( got, expected );
 
   test.case = 'base test, name';
@@ -175,8 +173,40 @@ function templateFileWriter( test )
   });
   writer.form();
   var got = provider.filesFindRecursive( { filePath : provider.path.current() + '/tmp.tmp', outputFormat : 'relative' } );
-  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  var expected = [ '.', './test1.txt', './test2.s', './folder', './folder/file.js' ];
   test.identical( got, expected );
+
+  /* test, srcTemplatePath */
+
+  test.case = 'srcTemplatePath is hard link';
+  var srcTemplatePath = __dirname + '../../../../../sample/Sample.js';
+  var writer = _.TemplateFileWriter
+  ({
+    srcTemplatePath : srcTemplatePath,
+    dstPath : testPath,
+    dstProvider : provider,
+  });
+  writer.form();
+  var got = provider.filesFindRecursive( { filePath : testPath + '/tmp.tmp', outputFormat : 'relative' } );
+  var expected = [ '.', './test1.txt', './test2.s', './folder', './folder/file.js' ];
+  test.identical( got, expected );
+
+  // test.case = 'srcTemplatePath is hard link';
+  // var extract = _.FileProvider.Extract( { filesTree : template } );
+  // extract.filesReflectTo( _.fileProvider, __dirname + '/tmp.tmp' );
+  // var srcTemplatePath = _.path.nativize( './tmp.tmp/test2.s' );
+  // var writer = _.TemplateFileWriter
+  // ({
+  //   srcTemplatePath : srcTemplatePath,
+  //   dstPath : testPath,
+  //   dstProvider : provider,
+  // });
+  // writer.form();
+  // var got = provider.filesFindRecursive( { filePath : testPath + '/tmp.tmp', outputFormat : 'relative' } );
+  // var expected = [ '.', './test1.txt', './test2.s', './folder', './folder/file.js' ];
+  // test.identical( got, expected );
+
+
 
   /* - */
 
@@ -226,6 +256,11 @@ function templateFileWriter( test )
     });
     write.form();
   });
+
+  // clear directory
+
+  if( provider instanceof _.FileProvider.HardDrive )
+  _.fileProvider.filesDelete( _.path.current() + '/tmp.tmp' );
 
 }
 
