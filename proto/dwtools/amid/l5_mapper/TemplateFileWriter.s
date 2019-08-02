@@ -76,8 +76,16 @@ function form()
 
   // let mainDirPath = _.path.effectiveMainDir();
 
-  _.assert( !self.srcProvider ^ self.template );
-  _.assert( !self.srcProvider ^ self.srcTemplatePath );
+  if( self.srcProvider )
+  {
+    _.assert( !self.template );
+    _.assert( !self.srcTemplatePath );
+  }
+  else
+  {
+    _.assert( !( self.template && self.srcTemplatePath ) );
+  }
+
 
   if( self.template === null && !self.srcProvider )
   {
