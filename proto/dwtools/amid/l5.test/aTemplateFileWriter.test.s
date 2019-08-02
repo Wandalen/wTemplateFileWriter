@@ -11,6 +11,8 @@ if( typeof module !== 'undefined' )
 
   require( '../l5_mapper/TemplateFileWriter.s' );
 
+  var waitSync = require( 'wait-sync' );
+
 }
 
 //
@@ -46,40 +48,6 @@ function onRoutineEnd( test )
   let path = context.provider.path;
 }
 
-//
-
-function softLinkIsSupported()
-{
-  let context = this;
-  let path = context.provider.path;
-
-  if( Config.platform === 'nodejs' && typeof process !== undefined )
-  if( process.platform === 'win32' )
-  {
-    var allow = false;
-    var dir = path.join( context.testSuitePath, 'softLinkIsSupported' );
-    var srcPath = path.join( dir, 'src' );
-    var dstPath = path.join( dir, 'dst' );
-
-    _.fileProvider.filesDelete( dir );
-    _.fileProvider.fileWrite( srcPath, srcPath );
-
-    try
-    {
-      _.fileProvider.softLink({ dstPath : dstPath, srcPath : srcPath, throwing : 1, sync : 1 });
-      allow = _.fileProvider.isSoftLink( dstPath );
-    }
-    catch( err )
-    {
-      logger.error( err );
-    }
-
-    return allow;
-  }
-
-  return true;
-}
-
 //--
 // tests
 //--
@@ -101,7 +69,7 @@ function templateFileWriter( test )
         'file.js' : 'console.log( "file.js" );'
       },
       'test1.txt' : 'Test file1 content',
-      'test2.txt' : '{ "template file.txt" : "content of template file"}',
+      'test2.txt' : '{ "file.js" : "console.log( "file.js" )" }',
     }
   };
 
@@ -113,9 +81,9 @@ function templateFileWriter( test )
     dstProvider : provider,
   });
   writer.form();
-  var got = provider.filesFindRecursive( testPath + '/tmp.tmp' );
-  var expected = './test1.txt';
-  test.identical( got[ 1 ].relative, expected );
+  var got = provider.filesFindRecursive( { filePath : testPath + '/tmp.tmp', outputFormat : 'relative' } );
+  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  test.identical( got, expected );
 
   test.case = 'base test, name';
   var writer = _.TemplateFileWriter
@@ -126,9 +94,9 @@ function templateFileWriter( test )
     name : 'filename',
   });
   writer.form();
-  var got = provider.filesFindRecursive( testPath + '/tmp.tmp' );
-  var expected = './folder/file.js';
-  test.identical( got[ 4 ].relative, expected );
+  var got = provider.filesFindRecursive( { filePath : testPath + '/tmp.tmp', outputFormat : 'relative' } );
+  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  test.identical( got, expected );
 
 
   test.case = 'without dstPath';
@@ -138,9 +106,9 @@ function templateFileWriter( test )
     dstProvider : provider,
   });
   writer.form();
-  var got = provider.filesFindRecursive( provider.path.current() + '/tmp.tmp' );
-  var expected = './test1.txt';
-  test.identical( got[ 1 ].relative, expected );
+  var got = provider.filesFindRecursive( { filePath : provider.path.current() + '/tmp.tmp', outputFormat : 'relative' } );
+  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  test.identical( got, expected );
 
   test.case = 'without dstPath, name';
   var writer = _.TemplateFileWriter
@@ -150,9 +118,9 @@ function templateFileWriter( test )
     name : 'filename',
   });
   writer.form();
-  var got = provider.filesFindRecursive( provider.path.current() + '/tmp.tmp' );
-  var expected = './folder/file.js';
-  test.identical( got[ 4 ].relative, expected );
+  var got = provider.filesFindRecursive( { filePath : provider.path.current() + '/tmp.tmp', outputFormat : 'relative' } );
+  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  test.identical( got, expected );
 
   /* srcProvider is instance of FileProvider.Extract */
 
@@ -169,9 +137,9 @@ function templateFileWriter( test )
     dstProvider : provider,
   });
   writer.form();
-  var got = provider.filesFindRecursive( testPath + '/tmp.tmp' );
-  var expected = './test1.txt';
-  test.identical( got[ 1 ].relative, expected );
+  var got = provider.filesFindRecursive( { filePath : testPath + '/tmp.tmp', outputFormat : 'relative' } );
+  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  test.identical( got, expected );
 
   test.case = 'base test, name';
   var writer = _.TemplateFileWriter
@@ -182,9 +150,9 @@ function templateFileWriter( test )
     name : 'filename',
   });
   writer.form();
-  var got = provider.filesFindRecursive( testPath + '/tmp.tmp' );
-  var expected = './folder/file.js';
-  test.identical( got[ 4 ].relative, expected );
+  var got = provider.filesFindRecursive( { filePath : testPath + '/tmp.tmp', outputFormat : 'relative' } );
+  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  test.identical( got, expected );
 
 
   test.case = 'base test';
@@ -194,9 +162,9 @@ function templateFileWriter( test )
     dstProvider : provider,
   });
   writer.form();
-  var got = provider.filesFindRecursive( provider.path.current() + '/tmp.tmp' );
-  var expected = './test1.txt';
-  test.identical( got[ 1 ].relative, expected );
+  var got = provider.filesFindRecursive( { filePath : provider.path.current() + '/tmp.tmp', outputFormat : 'relative' } );
+  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  test.identical( got, expected );
 
   test.case = 'base test, name';
   var writer = _.TemplateFileWriter
@@ -206,11 +174,9 @@ function templateFileWriter( test )
     name : 'filename',
   });
   writer.form();
-  var got = provider.filesFindRecursive( provider.path.current() + '/tmp.tmp' );
-  var expected = './folder/file.js';
-  test.identical( got[ 4 ].relative, expected );
-
-  // test.case = 'srcTemplate';
+  var got = provider.filesFindRecursive( { filePath : provider.path.current() + '/tmp.tmp', outputFormat : 'relative' } );
+  var expected = [ '.', './test1.txt', './test2.txt', './folder', './folder/file.js' ];
+  test.identical( got, expected );
 
   /* - */
 
