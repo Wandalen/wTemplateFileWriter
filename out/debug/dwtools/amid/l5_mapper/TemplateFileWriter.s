@@ -53,8 +53,8 @@ function init( o )
   if( o )
   self.copy( o );
 
-  if( !self.fileProvider )
-  self.fileProvider = _.fileProvider;
+  if( !self.dstProvider )
+  self.dstProvider = _.fileProvider;
 
 }
 
@@ -64,31 +64,35 @@ function form()
 {
   let self = this;
 
-  _.assert( arguments.length === 0 );
+  _.assert( arguments.length === 0 ); debugger;
 
-  if( !self.currentPath )
-  self.currentPath = self.fileProvider.path.current();
+  if( !self.dstPath )
+  self.dstPath = self.dstProvider.path.current();
 
   // if( !self.basePath )
   // self.basePath = '.';
   //
-  // self.basePath = self.fileProvider.path.resolve( self.currentPath, self.basePath );
+  // self.basePath = self.dstProvider.path.resolve( self.dstPath, self.basePath );
 
   // let mainDirPath = _.path.effectiveMainDir();
 
-  if( self.template === null )
+  _.assert( !self.srcProvider ^ self.template );
+  _.assert( !self.srcProvider ^ self.srcTemplatePath );
+
+  if( self.template === null && !self.srcProvider )
   {
     try
     {
-      self.templateFilePath = self.fileProvider.path.resolve( self.currentPath, self.templateFilePath || './Template.s' );
-      self.template = require( _.path.path.nativize( self.templateFilePath ) );
+      // self.srcTemplatePath = self.dstProvider.path.resolve( self.dstPath, self.srcTemplatePath || './Template.s' );
+      self.srcTemplatePath = _.fileProvider.path.resolve( self.srcTemplatePath || './Template.s' );
+      self.template = require( _.path.path.nativize( self.srcTemplatePath ) );
     }
     catch( err )
     {
       _.errLogOnce( err );
     }
     if( !self.template )
-    throw _.errLogOnce( 'Cant read template', _.strQuote( self.templateFilePath ) );
+    throw _.errLogOnce( 'Cant read template', _.strQuote( self.srcTemplatePath ) );
   }
 
   let config = self.configGet();
@@ -97,22 +101,29 @@ function form()
   self.resolver = _.TemplateTreeResolver();
   self.resolver.tree = config;
 
-  self.templateResolved = self.resolver.resolve( self.template );
-  self.templateProvider = new _.FileProvider.Extract({ filesTree : self.templateResolved });
+  if( !self.srcProvider )
+  self.srcProvider = new _.FileProvider.Extract({ filesTree : self.template });
 
-  self.templateProvider.filesReflectTo
+  _.assert( self.srcProvider instanceof _.FileProvider.Extract );
+
+  // self.templateResolved
+
+  self.srcProvider.filesTree = self.resolver.resolve( self.srcProvider.filesTree );
+
+  self.srcProvider.filesReflectTo
   ({
-    dstProvider : _.fileProvider,
-    dstPath : self.currentPath,
+    dstProvider : self.dstProvider,
+    // dstProvider : _.fileProvider,
+    dstPath : self.dstPath,
     dstRewriting : 0,
     // basePath : self.basePath,
     // allowDeleteForRelinking : 1,
   });
 
-  // self.templateProvider.readToProvider
+  // self.srcProvider.readToProvider
   // ({
   //   dstProvider : _.fileProvider,
-  //   dstPath : self.currentPath,
+  //   dstPath : self.dstPath,
   //   basePath : self.basePath,
   //   allowDeleteForRelinking : 1,
   // });
@@ -134,7 +145,7 @@ function nameGet()
   let self = this;
   if( self.name !== null && self.name !== undefined )
   return self.name;
-  return _.path.name( self.currentPath );
+  return _.path.name( self.dstPath );
 }
 
 //
@@ -166,19 +177,21 @@ function onConfigGet()
 
 let Composes =
 {
-  currentPath : null,
+  dstPath : null,
   // basePath : null,
-  templateFilePath : null,
+  srcTemplatePath : null,
   name : null,
 }
 
 let Associates =
 {
 
-  fileProvider : null,
+  srcProvider : null,
+  dstProvider : null,
+
   resolver : null,
   template : null,
-  templateResolved : null,
+  // templateResolved : null,
 
   onConfigGet : onConfigGet,
 
@@ -186,8 +199,6 @@ let Associates =
 
 let Restricts =
 {
-
-  templateProvider : null,
 
 }
 
