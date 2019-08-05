@@ -271,6 +271,74 @@ function templateFileWriter( test )
   var expected = [ '.', './file' ];
   test.identical( got, expected );
 
+  /* resolver using */
+
+  test.case = 'default onConfigGet';
+  provider.filesDelete( testPath );
+  var template =
+  {
+    file : '{{name }}, {{lowName}}, {{highName}}'
+  };
+  var writer = _.TemplateFileWriter
+  ({
+    template : template,
+    dstPath : testPath,
+    dstProvider : provider,
+  });
+  writer.form();
+  var got = provider.fileRead( testPath + '/file' );
+  var name = _.path.name( testPath );
+  var expected = name + ', ' + name.toLowerCase() + ', ' + name.toUpperCase();
+  test.identical( got, expected );
+
+  //
+
+  test.case = 'custom onConfigGet';
+  provider.filesDelete( testPath );
+  var template =
+  {
+    file : '{{name }}, {{lowName}}, {{highName}}'
+  };
+  var configGet = function()
+  {
+    return { name : 'File', lowName : 'file', highName : 'FILE' };
+  }
+  var writer = _.TemplateFileWriter
+  ({
+    template : template,
+    dstPath : testPath,
+    dstProvider : provider,
+    onConfigGet : configGet,
+  });
+  writer.form();
+  var got = provider.fileRead( testPath + '/file' );
+  var name = _.path.name( testPath );
+  var expected = 'File, file, FILE';
+  test.identical( got, expected );
+
+
+  provider.filesDelete( testPath );
+  var template =
+  {
+    file : '{{any.key}} : {{any.value}}'
+  };
+  var configGet = function()
+  {
+    return { 'any.key' : 'key', 'any.value' : 'value' };
+  }
+  var writer = _.TemplateFileWriter
+  ({
+    template : template,
+    dstPath : testPath,
+    dstProvider : provider,
+    onConfigGet : configGet,
+  });
+  writer.form();
+  var got = provider.fileRead( testPath + '/file' );
+  var name = _.path.name( testPath );
+  var expected = 'key : value';
+  test.identical( got, expected );
+
   /* - */
 
   if( !Config.debug )
