@@ -22,7 +22,7 @@ function onSuiteBegin( test )
   Parent.onSuiteBegin.apply( this, arguments );
   context.provider = _.FileProvider.Extract({ usingExtraStat : 1, protocol : 'current' });
   let path = context.provider.path;
-  context.testSuitePath = path.dirTempOpen( 'suite-' + 'TemplateFileWriter' );
+  context.testSuitePath = path.dirTempOpen( 'suite-TemplateFileWriter' );
 }
 
 //

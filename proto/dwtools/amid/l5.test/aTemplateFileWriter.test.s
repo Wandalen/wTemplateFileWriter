@@ -365,7 +365,6 @@ var Self =
   context :
   {
     provider : null,
-    hub : null,
     testSuitePath : null,
   },
 
