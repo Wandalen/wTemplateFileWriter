@@ -22,7 +22,12 @@ function onSuiteBegin( test )
   context.provider = _.FileProvider.HardDrive({ protocol : 'current' });
   let path = context.provider.path;
   context.testSuitePath = path.dirTempOpen( 'suite-TemplateFileWriter' );
-  context.testSuitePath = context.provider.pathResolveLinkFull({ filePath : context.testSuitePath, resolvingSoftLink : 1 });
+  context.testSuitePath = context.provider.pathResolveLinkFull
+  ({
+    filePath : context.testSuitePath,
+    resolvingSoftLink : 1,
+    resolvingTextLink : 1,
+  });
 }
 
 // --
