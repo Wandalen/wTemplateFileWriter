@@ -23,6 +23,12 @@ function onSuiteBegin( test )
   context.provider = _.FileProvider.Extract({ usingExtraStat : 1, protocol : 'current' });
   let path = context.provider.path;
   context.testSuitePath = path.dirTempOpen( 'suite-TemplateFileWriter' );
+  context.testSuitePath = context.provider.pathResolveLinkFull
+  ({
+    filePath : context.testSuitePath,
+    resolvingSoftLink : 1,
+    resolvingTextLink : 1,
+  });
 }
 
 //
