@@ -82,6 +82,11 @@ path:
       - ../proto/dwtools/amid
       - ../proto/dwtools/amid/l5_mapper
       - ../proto/dwtools/amid/l5_mapper/TemplateFileWriter.s
+      - ../proto/dwtools/amid/l5_mapper.test
+      - ../proto/dwtools/amid/l5_mapper.test/aTemplateFileWriter.test.s
+      - ../proto/dwtools/amid/l5_mapper.test/TemplateFileWriter.Extract.test.ss
+      - >-
+        ../proto/dwtools/amid/l5_mapper.test/TemplateFileWriter.HardDrive.test.ss
       - ../proto/dwtools/atop
 submodule: {}
 reflector:
@@ -365,6 +370,11 @@ module:
           - proto/dwtools/amid
           - proto/dwtools/amid/l5_mapper
           - proto/dwtools/amid/l5_mapper/TemplateFileWriter.s
+          - proto/dwtools/amid/l5_mapper.test
+          - proto/dwtools/amid/l5_mapper.test/aTemplateFileWriter.test.s
+          - proto/dwtools/amid/l5_mapper.test/TemplateFileWriter.Extract.test.ss
+          - >-
+            proto/dwtools/amid/l5_mapper.test/TemplateFileWriter.HardDrive.test.ss
           - proto/dwtools/atop
     submodule: {}
     reflector:
