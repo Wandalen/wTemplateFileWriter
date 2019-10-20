@@ -66,13 +66,13 @@ function form()
 
   _.assert( arguments.length === 0 ); debugger;
 
-  if( !self.dstPath )
-  self.dstPath = self.dstProvider.path.current();
+  if( !self.dst )
+  self.dst = self.dstProvider.path.current();
 
   // if( !self.basePath )
   // self.basePath = '.';
   //
-  // self.basePath = self.dstProvider.path.resolve( self.dstPath, self.basePath );
+  // self.basePath = self.dstProvider.path.resolve( self.dst, self.basePath );
 
   // let mainDirPath = _.path.effectiveMainDir();
 
@@ -91,7 +91,7 @@ function form()
   {
     try
     {
-      // self.srcTemplatePath = self.dstProvider.path.resolve( self.dstPath, self.srcTemplatePath || './Template.s' );
+      // self.srcTemplatePath = self.dstProvider.path.resolve( self.dst, self.srcTemplatePath || './Template.s' );
       self.srcTemplatePath = _.fileProvider.path.resolve( self.srcTemplatePath || './Template.s' );
       self.template = require( _.path.path.nativize( self.srcTemplatePath ) );
     }
@@ -122,7 +122,7 @@ function form()
   ({
     dstProvider : self.dstProvider,
     // dstProvider : _.fileProvider,
-    dstPath : self.dstPath,
+    dst : self.dst,
     dstRewriting : 0,
     // basePath : self.basePath,
     // allowDeleteForRelinking : 1,
@@ -131,7 +131,7 @@ function form()
   // self.srcProvider.readToProvider
   // ({
   //   dstProvider : _.fileProvider,
-  //   dstPath : self.dstPath,
+  //   dst : self.dst,
   //   basePath : self.basePath,
   //   allowDeleteForRelinking : 1,
   // });
@@ -153,7 +153,7 @@ function nameGet()
   let self = this;
   if( self.name !== null && self.name !== undefined )
   return self.name;
-  return _.path.name( self.dstPath );
+  return _.path.name( self.dst );
 }
 
 //
@@ -185,7 +185,7 @@ function onConfigGet()
 
 let Composes =
 {
-  dstPath : null,
+  dst : null,
   // basePath : null,
   srcTemplatePath : null,
   name : null,
