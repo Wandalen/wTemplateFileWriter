@@ -16,7 +16,7 @@
   {
     "url" : "https://github.com/Wandalen/wTemplateFileWriter/issues"
   }, 
-  "dependencies" : { "wTools" : "", "wtemplatetreeresolver" : "", "wFiles" : "" }, 
-  "devDependencies" : { "wTesting" : "" }, 
+  "dependencies" : { "wTools" : "beta", "wtemplatetreeresolver" : "beta", "wFiles" : "beta" }, 
+  "devDependencies" : { "wTesting" : "beta" }, 
   "keywords" : [ "wTools", "template", "instantiating template", "file system" ]
 }
