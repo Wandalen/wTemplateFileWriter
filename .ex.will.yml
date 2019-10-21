@@ -27,7 +27,7 @@ about :
 path :
 
   repository : git+https:///github.com/Wandalen/wTemplateFileWriter.git
-  remotes :
+  origins :
    - git+https:///github.com/Wandalen/wTemplateFileWriter.git
    - npm:///wtemplatefilewriter
   bugtracker : https:///github.com/Wandalen/wTemplateFileWriter/issues
