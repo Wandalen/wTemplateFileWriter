@@ -21,6 +21,7 @@ if( typeof module !== 'undefined' )
   _.include( 'wCopyable' );
   _.include( 'wFiles' );
   _.include( 'wTemplateTreeResolver' );
+  _.include( 'wTemplateTreeResolver2' );
 
 }
 
@@ -64,7 +65,7 @@ function form()
 {
   let self = this;
 
-  _.assert( arguments.length === 0 ); debugger;
+  _.assert( arguments.length === 0 );
 
   if( !self.dst )
   self.dst = self.dstProvider.path.current();
