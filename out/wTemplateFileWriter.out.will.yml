@@ -2,35 +2,39 @@ format: outwillfile-2.0
 root:
   - wTemplateFileWriter.out
 consistency:
-  ../.ex.will.yml: &ref_0
+  wTemplateFileWriter.out.will.yml: &ref_0
+    hash: 1b4e31e719168bb948b39b5ef97d5714
+    size: 38950
+  ../.ex.will.yml: &ref_1
     hash: 269c16b29c8b5ddfd380ec9e3604084b
     size: 1867
-  ../.im.will.yml: &ref_1
+  ../.im.will.yml: &ref_2
     hash: 5f1efef20f16738430f9bb5f32a29ffb
     size: 5062
 module:
   wTemplateFileWriter.out:
     about:
       name: wTemplateFileWriter
+      org: noorg
       description: 'Write template to the file system, instantiating it.'
       enabled: 1
       version: 0.4.0
-      interpreters: &ref_2
+      interpreters:
         - njs >= 8.0.0
         - chrome >= 60.0.0
         - firefox >= 60.0.0
-      keywords: &ref_3
+      keywords:
         - wTools
         - template
         - instantiating template
         - file system
       license: MIT
       author: Kostiantyn Wandalen <wanalen@willbe.so>
-      contributors: &ref_4
+      contributors:
         - Kostiantyn Wandalen <wanalen@willbe.so>
         - Dmytro Kryvoruchko <dm.vict.kr@gmail.com>
       npm.name: wtemplatefilewriter
-      npm.scripts: &ref_5
+      npm.scripts:
         test: wtest .run proto/**
         docgen: wdocgen .build proto
     path:
@@ -706,6 +710,22 @@ module:
           content: prime
         inherit:
           - files.transpile
+      exported.proto.export:
+        opts:
+          reflector: 'reflector::exported.proto.export*'
+        criterion:
+          content: proto
+          export: 1
+        inherit:
+          - files.reflect
+      exported.files.proto.export:
+        opts:
+          reflector: 'reflector::exported.files.proto.export*'
+        criterion:
+          content: proto
+          export: 1
+        inherit:
+          - files.reflect
     build:
       proto.export:
         steps:
@@ -794,21 +814,34 @@ module:
           content: proto
           export: 1
     consistency:
-      ../.ex.will.yml: *ref_0
-      ../.im.will.yml: *ref_1
+      wTemplateFileWriter.out.will.yml: *ref_0
+      ../.ex.will.yml: *ref_1
+      ../.im.will.yml: *ref_2
   ../:
     about:
       name: wTemplateFileWriter
+      org: noorg
       description: 'Write template to the file system, instantiating it.'
       enabled: 1
       version: 0.4.0
-      interpreters: *ref_2
-      keywords: *ref_3
+      interpreters:
+        - njs >= 8.0.0
+        - chrome >= 60.0.0
+        - firefox >= 60.0.0
+      keywords:
+        - wTools
+        - template
+        - instantiating template
+        - file system
       license: MIT
       author: Kostiantyn Wandalen <wanalen@willbe.so>
-      contributors: *ref_4
+      contributors:
+        - Kostiantyn Wandalen <wanalen@willbe.so>
+        - Dmytro Kryvoruchko <dm.vict.kr@gmail.com>
       npm.name: wtemplatefilewriter
-      npm.scripts: *ref_5
+      npm.scripts:
+        test: wtest .run proto/**
+        docgen: wdocgen .build proto
     path:
       module.willfiles:
         criterion:
@@ -849,12 +882,8 @@ module:
       bugtracker:
         path: 'https:///github.com/Wandalen/wTemplateFileWriter/issues'
       in:
-        criterion:
-          predefined: 0
         path: .
       out:
-        criterion:
-          predefined: 0
         path: out
       temp:
         path: 'path::out'
@@ -1491,3 +1520,6 @@ module:
       ../.im.will.yml:
         hash: 5f1efef20f16738430f9bb5f32a29ffb
         size: 5062
+      wTemplateFileWriter.out.will.yml:
+        hash: 1b4e31e719168bb948b39b5ef97d5714
+        size: 38950

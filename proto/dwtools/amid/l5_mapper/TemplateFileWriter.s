@@ -21,7 +21,7 @@ if( typeof module !== 'undefined' )
   _.include( 'wCopyable' );
   _.include( 'wFiles' );
   _.include( 'wTemplateTreeResolver' );
-  _.include( 'wTemplateTreeResolver2' );
+  // _.include( 'wTemplateTreeResolver2' );
 
 }
 
