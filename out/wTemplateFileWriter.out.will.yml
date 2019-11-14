@@ -1524,6 +1524,4 @@ module:
       ../.im.will.yml:
         hash: 8f0486b3643077f34ef8838d057e6cc0
         size: 5136
-      wTemplateFileWriter.out.will.yml:
-        hash: e47a34168646785bb3b56fb380e001cb
-        size: 38979
+      wTemplateFileWriter.out.will.yml: *ref_0
