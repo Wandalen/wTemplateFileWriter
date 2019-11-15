@@ -143,6 +143,8 @@ function form()
 
 function Exec()
 {
+  if( Config.interpreter === 'browser' )
+  return;
   let self = new this.Self();
   self.form();
   return self;
