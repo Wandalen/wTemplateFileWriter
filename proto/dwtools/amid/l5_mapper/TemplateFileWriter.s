@@ -65,7 +65,7 @@ function form()
 {
   let self = this;
 
-  _.assert( arguments.length === 0 );
+  _.assert( arguments.length === 0, 'Expects no arguments' );
 
   if( !self.dst )
   self.dst = self.dstProvider.path.current();
