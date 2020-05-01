@@ -1,6 +1,6 @@
 {
   "name" : "wtemplatefilewriter",
-  "version" : "0.3.136",
+  "version" : "0.3.137",
   "description" : "Write template to the file system, instantiating it. ",
   "author" : "Kostiantyn Wandalen <wanalen@willbe.so>",
   "license" : "MIT",
@@ -16,7 +16,7 @@
   {
     "url" : "https://github.com/Wandalen/wTemplateFileWriter/issues"
   },
-  "dependencies" : { "wTools" : "alpha", "wtemplatetreeresolver" : "alpha", "wFiles" : "alpha" },
-  "devDependencies" : { "wTesting" : "alpha" },
+  "dependencies" : { "wTools" : "gamma", "wtemplatetreeresolver" : "gamma", "wFiles" : "gamma" },
+  "devDependencies" : { "wTesting" : "gamma" },
   "keywords" : [ "wTools", "template", "instantiating template", "file system" ]
 }
