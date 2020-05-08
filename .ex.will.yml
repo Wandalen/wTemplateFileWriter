@@ -15,9 +15,9 @@ about :
   - instantiating template
   - file system
   license : MIT
-  author : 'Kostiantyn Wandalen <wanalen@willbe.so>'
+  author : 'Kostiantyn Wandalen <wanalen@01.school>'
   contributors :
-  - 'Kostiantyn Wandalen <wanalen@willbe.so>'
+  - 'Kostiantyn Wandalen <wanalen@01.school>'
   - 'Dmytro Kryvoruchko <dm.vict.kr@gmail.com>'
   npm.name : 'wtemplatefilewriter'
   npm.scripts :
