@@ -30,7 +30,8 @@ if( typeof module !== 'undefined' )
 let _global = _global_;
 let _ = _global_.wTools;
 let Parent = null;
-let Self = function wTemplateFileWriter( o )
+let Self = wTemplateFileWriter;
+function wTemplateFileWriter( o )
 {
   return _.workpiece.construct( Self, this, arguments );
 }
@@ -177,8 +178,15 @@ function onConfigGet()
   let name = self.nameGet();
   let lowName = name.toLowerCase();
   let highName = name.toUpperCase();
+  let prefixlessName;
 
-  let result = { name : name, lowName : lowName, highName : highName };
+  if( name[ 0 ] === 'w' )
+  prefixlessName = name.slice( 1 );
+  else
+  prefixlessName = name;
+
+  let result = { name, lowName, highName, prefixlessName };
+
   return result;
 }
 
