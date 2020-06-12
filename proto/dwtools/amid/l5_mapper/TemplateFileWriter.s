@@ -21,7 +21,6 @@ if( typeof module !== 'undefined' )
   _.include( 'wCopyable' );
   _.include( 'wFiles' );
   _.include( 'wTemplateTreeResolver' );
-  // _.include( 'wTemplateTreeResolver2' );
 
 }
 
@@ -71,13 +70,6 @@ function form()
   if( !self.dst )
   self.dst = self.dstProvider.path.current();
 
-  // if( !self.basePath )
-  // self.basePath = '.';
-  //
-  // self.basePath = self.dstProvider.path.resolve( self.dst, self.basePath );
-
-  // let mainDirPath = _.path.effectiveMainDir();
-
   if( self.srcProvider )
   {
     _.assert( !self.template );
@@ -93,7 +85,6 @@ function form()
   {
     try
     {
-      // self.srcTemplatePath = self.dstProvider.path.resolve( self.dst, self.srcTemplatePath || './Template.s' );
       self.srcTemplatePath = _.fileProvider.path.resolve( self.srcTemplatePath || './Template.s' );
       self.template = require( _.path.path.nativize( self.srcTemplatePath ) );
     }
@@ -108,7 +99,7 @@ function form()
   let config = self.configGet();
 
   if( !self.resolver )
-  self.resolver = _.TemplateTreeResolver();
+  self.resolver = _.TemplateTreeResolver({ prefixToken : '{:', postfixToken : ':}' });
   self.resolver.tree = config;
 
   if( !self.srcProvider )
@@ -116,27 +107,16 @@ function form()
 
   _.assert( self.srcProvider instanceof _.FileProvider.Extract );
 
-  // self.templateResolved
-
+  debugger;
   self.srcProvider.filesTree = self.resolver.resolve( self.srcProvider.filesTree );
+  debugger;
 
   self.srcProvider.filesReflectTo
   ({
     dstProvider : self.dstProvider,
-    // dstProvider : _.fileProvider,
     dst : self.dst,
     dstRewriting : 0,
-    // basePath : self.basePath,
-    // allowDeleteForRelinking : 1,
   });
-
-  // self.srcProvider.readToProvider
-  // ({
-  //   dstProvider : _.fileProvider,
-  //   dst : self.dst,
-  //   basePath : self.basePath,
-  //   allowDeleteForRelinking : 1,
-  // });
 
 }
 
@@ -180,12 +160,14 @@ function onConfigGet()
   let highName = name.toUpperCase();
   let prefixlessName;
 
-  if( name[ 0 ] === 'w' )
-  prefixlessName = name.slice( 1 );
-  else
-  prefixlessName = name;
+  // if( name[ 0 ] === 'w' )
+  // prefixlessName = name.slice( 1 );
+  // else
+  // prefixlessName = name;
+  //
+  // let result = { name, lowName, highName, prefixlessName };
 
-  let result = { name, lowName, highName, prefixlessName };
+  let result = { name, lowName, highName };
 
   return result;
 }
@@ -197,7 +179,6 @@ function onConfigGet()
 let Composes =
 {
   dst : null,
-  // basePath : null,
   srcTemplatePath : null,
   name : null,
 }
@@ -210,7 +191,6 @@ let Associates =
 
   resolver : null,
   template : null,
-  // templateResolved : null,
 
   onConfigGet : onConfigGet,
 
@@ -249,8 +229,6 @@ let Proto =
 
 }
 
-// define
-
 _.classDeclare
 ({
   cls : Self,
@@ -261,10 +239,6 @@ _.classDeclare
 _.Copyable.mixin( Self );
 
 //
-
-// if( typeof module !== 'undefined' )
-// if( _global_.WTOOLS_PRIVATE )
-// { /* delete require.cache[ module.id ]; */ }
 
 _[ Self.shortName ] = _global_[ Self.name ] = Self;
 if( typeof module !== 'undefined' )
