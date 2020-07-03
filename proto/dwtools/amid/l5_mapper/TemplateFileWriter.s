@@ -5,8 +5,8 @@
 /*
 qqq :
 - implement tests for TemplateFileWriter
-- Use the module in Filer
-- Add commands to filer:
+- Use the module in Censor
+- Add commands to censor:
 .extract.read {-src-}
 .extract.select {-terminal-}
 .extract.write {-dst-}
