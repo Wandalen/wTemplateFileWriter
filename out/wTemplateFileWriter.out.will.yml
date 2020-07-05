@@ -158,6 +158,7 @@ module:
           export: 1
         path:
           - ../proto
+          - ../proto/Integration.test.s
           - ../proto/dwtools
           - ../proto/dwtools/Tools.s
           - ../proto/dwtools/abase
@@ -1507,6 +1508,4 @@ module:
       ../.im.will.yml:
         hash: 8f0486b3643077f34ef8838d057e6cc0
         size: 5136
-      wTemplateFileWriter.out.will.yml:
-        hash: 2b9cd53293ab309b157d2604f999812d
-        size: 38632
+      wTemplateFileWriter.out.will.yml: *ref_0
