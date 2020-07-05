@@ -1,4 +1,4 @@
-# wTemplateFileWriter [![Build Status](https://travis-ci.org/Wandalen/wTemplateFileWriter.svg?branch=master)](https://travis-ci.org/Wandalen/wTemplateFileWriter)
+# module::TemplateFileWriter [![Status](https://github.com/Wandalen/wTemplateFileWriter/workflows/Test/badge.svg)](https://github.com/Wandalen/wTemplateFileWriter}/actions?query=workflow%3ATest)
 
 Write template to the file system, instantiating it.
 

@@ -108,6 +108,7 @@ function form()
   _.assert( self.srcProvider instanceof _.FileProvider.Extract );
 
   debugger;
+  if( self.resolving )
   self.srcProvider.filesTree = self.resolver.resolve( self.srcProvider.filesTree );
   debugger;
 
@@ -160,13 +161,6 @@ function onConfigGet()
   let highName = name.toUpperCase();
   let prefixlessName;
 
-  // if( name[ 0 ] === 'w' )
-  // prefixlessName = name.slice( 1 );
-  // else
-  // prefixlessName = name;
-  //
-  // let result = { name, lowName, highName, prefixlessName };
-
   let result = { name, lowName, highName };
 
   return result;
@@ -181,6 +175,7 @@ let Composes =
   dst : null,
   srcTemplatePath : null,
   name : null,
+  resolving : 1,
 }
 
 let Associates =
