@@ -1,4 +1,4 @@
-# module::TemplateFileWriter [![Status](https://github.com/Wandalen/wTemplateFileWriter/workflows/Test/badge.svg)](https://github.com/Wandalen/wTemplateFileWriter/actions?query=workflow%3ATest) [![experimental](https://img.shields.io/badge/stability-experimental-orange.svg)](https://github.com/emersion/stability-badges#experimental)
+# module::TemplateFileWriter [![Status](https://github.com/Wandalen/wTemplateFileWriter/workflows/Publish/badge.svg)](https://github.com/Wandalen/wTemplateFileWriter/actions?query=workflow%3APublish) [![experimental](https://img.shields.io/badge/stability-experimental-orange.svg)](https://github.com/emersion/stability-badges#experimental)
 
 Write template to the file system, instantiating it.
 
