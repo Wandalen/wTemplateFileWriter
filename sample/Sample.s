@@ -5,7 +5,7 @@ if( typeof module !== 'undefined' )
   require( '..' /* 'wtemplatefilewriter' */ );
 }
 
-var _ = wTools;
+let _ = wTools;
 
 var template =
 {

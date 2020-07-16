@@ -15,8 +15,8 @@ if( typeof module !== 'undefined' )
 
 //
 
-var _ = _global_.wTools;
-var Parent = wTester;
+let _ = _global_.wTools;
+let Parent = wTester;
 
 // --
 // context
@@ -68,7 +68,7 @@ function templateFileWriter( test )
       'test2.s' : "Test file2 content",
     }
   };
-  var templateFile = "var Self = { file : 'Content of file' };\
+  var templateFile = "let Self = { file : 'Content of file' };\
                      \nif( typeof module !== 'undefined' )\
                      \nmodule[ 'exports' ] = Self;";
 
@@ -349,7 +349,7 @@ function templateFileWriterLinks( test )
   let provider = context.provider;
   let testPath = context.testSuitePath;
 
-  var templateFile = "var Self = { file : 'Content of file' };\
+  var templateFile = "let Self = { file : 'Content of file' };\
                      \nif( typeof module !== 'undefined' )\
                      \nmodule[ 'exports' ] = Self;";
 
@@ -559,7 +559,7 @@ function templateFileWriterLinks( test )
 // declare
 // --
 
-var Self =
+let Self =
 {
 
   name : 'Tools/mid/l5.test/TemplateFileWriter/Abstract',
