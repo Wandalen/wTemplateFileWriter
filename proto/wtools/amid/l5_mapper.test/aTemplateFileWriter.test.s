@@ -32,8 +32,8 @@ function onSuiteBegin( test )
 function onSuiteEnd()
 {
   let path = this.provider.path;
-  _.assert( _.strHas( this.testSuitePath, 'tmp.tmp' ) );
-  path.dirTempClose( this.testSuitePath );
+  _.assert( _.strHas( this.suiteTempPath, 'tmp.tmp' ) );
+  path.tempClose( this.suiteTempPath );
   this.provider.finit();
 }
 
@@ -54,7 +54,7 @@ function templateFileWriter( test )
 {
   let context = this;
   let provider = context.provider;
-  let testPath = context.testSuitePath;
+  let testPath = context.suiteTempPath;
 
   var template =
   {
@@ -347,7 +347,7 @@ function templateFileWriterLinks( test )
 {
   let context = this;
   let provider = context.provider;
-  let testPath = context.testSuitePath;
+  let testPath = context.suiteTempPath;
 
   var templateFile = "let Self = { file : 'Content of file' };\
                      \nif( typeof module !== 'undefined' )\
@@ -374,7 +374,7 @@ function templateFileWriterLinks( test )
 
   test.case = 'srcTemplatePath is hard link, dstPath, dstProvider';
   provider.filesDelete( testPath );
-  var pathToTemp = _.fileProvider.path.dirTempOpen( 'tmp.tmp' );
+  var pathToTemp = _.fileProvider.path.tempOpen( 'tmp.tmp' );
   var customTemplate = pathToTemp + '/Template.s';
   _.fileProvider.fileWrite( customTemplate, templateFile );
   var writer = _.TemplateFileWriter
@@ -393,7 +393,7 @@ function templateFileWriterLinks( test )
 
   test.case = 'srcTemplatePath is soft link, dstPath, dstProvider';
   provider.filesDelete( testPath );
-  var pathToTemp = _.fileProvider.path.dirTempOpen( 'tmp.tmp' );
+  var pathToTemp = _.fileProvider.path.tempOpen( 'tmp.tmp' );
   var customTemplate = pathToTemp + '/Template.s';
   var softlink = pathToTemp + '/softlink';
   _.fileProvider.fileWrite( customTemplate, templateFile );
@@ -414,7 +414,7 @@ function templateFileWriterLinks( test )
 
   test.case = 'srcTemplatePath is double soft link, dstPath, dstProvider';
   provider.filesDelete( testPath );
-  var pathToTemp = _.fileProvider.path.dirTempOpen( 'tmp.tmp' );
+  var pathToTemp = _.fileProvider.path.tempOpen( 'tmp.tmp' );
   var customTemplate = pathToTemp + '/Template.s';
   var softlink = pathToTemp + '/softlink';
   _.fileProvider.fileWrite( customTemplate, templateFile );
@@ -436,7 +436,7 @@ function templateFileWriterLinks( test )
 
   test.case = 'srcTemplatePath is soft link, relative';
   provider.filesDelete( testPath );
-  var pathToTemp = _.fileProvider.path.dirTempOpen( 'tmp.tmp' );
+  var pathToTemp = _.fileProvider.path.tempOpen( 'tmp.tmp' );
   var customTemplate = pathToTemp + '/Template.s';
   var softlink = pathToTemp + '/softlink';
   _.fileProvider.fileWrite( customTemplate, templateFile );
@@ -458,7 +458,7 @@ function templateFileWriterLinks( test )
 
   test.case = 'srcTemplatePath is text link, dstPath, dstProvider';
   provider.filesDelete( testPath );
-  var pathToTemp = _.fileProvider.path.dirTempOpen( 'tmp.tmp' );
+  var pathToTemp = _.fileProvider.path.tempOpen( 'tmp.tmp' );
   var customTemplate = pathToTemp + '/Template.s';
   var textlink = pathToTemp + '/textlink';
   _.fileProvider.fileWrite( customTemplate, templateFile );
@@ -481,7 +481,7 @@ function templateFileWriterLinks( test )
 
   test.case = 'srcTemplatePath is double text link, dstPath, dstProvider';
   provider.filesDelete( testPath );
-  var pathToTemp = _.fileProvider.path.dirTempOpen( 'tmp.tmp' );
+  var pathToTemp = _.fileProvider.path.tempOpen( 'tmp.tmp' );
   var customTemplate = pathToTemp + '/Template.s';
   var textlink = pathToTemp + '/textlink';
   _.fileProvider.fileWrite( customTemplate, templateFile );
@@ -506,7 +506,7 @@ function templateFileWriterLinks( test )
 
   test.case = 'srcTemplatePath is text link, relative';
   provider.filesDelete( testPath );
-  var pathToTemp = _.fileProvider.path.dirTempOpen( 'tmp.tmp' );
+  var pathToTemp = _.fileProvider.path.tempOpen( 'tmp.tmp' );
   var customTemplate = pathToTemp + '/Template.s';
   var textlink = pathToTemp + '/textlink';
   _.fileProvider.fileWrite( customTemplate, templateFile );
@@ -574,7 +574,7 @@ let Self =
   context :
   {
     provider : null,
-    testSuitePath : null,
+    suiteTempPath : null,
   },
 
   tests :

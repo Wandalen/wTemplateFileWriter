@@ -22,10 +22,10 @@ function onSuiteBegin( test )
   context.provider = _.FileProvider.HardDrive({ protocol : 'current' });
   context.hub = _.FileProvider.Hub({ providers : [ context.provider ], defaultProvider : context.provider });
   let path = context.provider.path;
-  context.testSuitePath = path.dirTempOpen( 'suite-TemplateFileWriter' );
-  context.testSuitePath = context.provider.pathResolveLinkFull
+  context.suiteTempPath = path.tempOpen( 'suite-TemplateFileWriter' );
+  context.suiteTempPath = context.provider.pathResolveLinkFull
   ({
-    filePath : context.testSuitePath,
+    filePath : context.suiteTempPath,
     resolvingSoftLink : 1,
     resolvingTextLink : 1,
   });
@@ -47,7 +47,7 @@ var Proto =
 
   context :
   {
-    testSuitePath : null,
+    suiteTempPath : null,
   },
 
   tests :

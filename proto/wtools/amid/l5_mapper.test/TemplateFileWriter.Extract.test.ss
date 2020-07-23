@@ -22,10 +22,10 @@ function onSuiteBegin( test )
   Parent.onSuiteBegin.apply( this, arguments );
   context.provider = _.FileProvider.Extract({ usingExtraStat : 1, protocol : 'current' });
   let path = context.provider.path;
-  context.testSuitePath = path.dirTempOpen( 'suite-TemplateFileWriter' );
-  context.testSuitePath = context.provider.pathResolveLinkFull
+  context.suiteTempPath = path.tempOpen( 'suite-TemplateFileWriter' );
+  context.suiteTempPath = context.provider.pathResolveLinkFull
   ({
-    filePath : context.testSuitePath,
+    filePath : context.suiteTempPath,
     resolvingSoftLink : 1,
     resolvingTextLink : 1,
   });
