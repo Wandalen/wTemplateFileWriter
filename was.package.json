@@ -17,6 +17,6 @@
     "url" : "https://github.com/Wandalen/wTemplateFileWriter/issues"
   },
   "dependencies" : { "wTools" : "", "wtemplatetreeresolver" : "", "wFiles" : "" },
-  "devDependencies" : { "wTesting" : "" },
+  "devDependencies" : { "wTesting" : "", "eslint" : "7.1.0", "wtemplatefilewriter" : "file:." },
   "keywords" : [ "wTools", "template", "instantiating template", "file system" ]
 }
