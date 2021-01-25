@@ -1,4 +1,5 @@
-( function _FilesFind_Extract_test_s_( ) {
+( function _FilesFind_Extract_test_s_( )
+{
 
 'use strict';
 
@@ -43,7 +44,6 @@ function onSuiteEnd()
 //--
 // tests
 //--
-
 
 
 // --

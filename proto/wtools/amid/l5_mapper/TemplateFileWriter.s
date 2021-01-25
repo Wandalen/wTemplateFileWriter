@@ -1,4 +1,5 @@
-( function _TemplateFileWriter_s_( ) {
+( function _TemplateFileWriter_s_( )
+{
 
 'use strict';
 
@@ -187,7 +188,7 @@ let Associates =
   resolver : null,
   template : null,
 
-  onConfigGet : onConfigGet,
+  onConfigGet,
 
 }
 
