@@ -1,4 +1,5 @@
-( function _TemplateFileWriter_HardDrive_test_ss_( ) {
+( function _TemplateFileWriter_HardDrive_test_ss_( )
+{
 
 'use strict';
 

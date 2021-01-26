@@ -16,7 +16,7 @@ var template =
   }
 }
 
-var writer = new wTemplateFileWriter({ template : template });
+var writer = new wTemplateFileWriter({ template });
 
 writer.form();
 

@@ -1,4 +1,5 @@
-( function _TemplateFileWriter_test_s_( ) {
+( function _TemplateFileWriter_test_s_( )
+{
 
 'use strict';
 
@@ -65,14 +66,14 @@ function templateFileWriter( test )
         'file.js' : 'console.log( "file.js" );'
       },
       'test1.txt' : 'Test file1 content',
-      'test2.s' : "Test file2 content",
+      'test2.s' : 'Test file2 content',
     }
   };
-  var templateFile = "let Self = { file : 'Content of file' };\
+  var templateFile = `let Self = { file : 'Content of file' };\
                      \nif( typeof module !== 'undefined' )\
-                     \nmodule[ 'exports' ] = Self;";
+                     \nmodule[ 'exports' ] = Self;`;
 
-   /* testing of rewriting existed files by templateWriter */
+  /* testing of rewriting existed files by templateWriter */
 
   test.case = 'rewriting test';
   provider.filesDelete( testPath );
@@ -80,7 +81,7 @@ function templateFileWriter( test )
   provider.fileWrite( testPath + '/tmp.tmp/folder/file.js', 'Should not be overwritten, file.js' );
   var writer = _.TemplateFileWriter
   ({
-    template : template,
+    template,
     dstPath : testPath,
     dstProvider : provider,
   });
@@ -101,7 +102,7 @@ function templateFileWriter( test )
   provider.filesDelete( testPath );
   var writer = _.TemplateFileWriter
   ({
-    template : template,
+    template,
     dstPath : testPath,
     dstProvider : provider,
   });
@@ -117,7 +118,7 @@ function templateFileWriter( test )
   var writer = _.TemplateFileWriter
   ({
     dstPath : testPath,
-    template : template,
+    template,
     dstProvider : provider,
     name : 'filename',
   });
@@ -132,7 +133,7 @@ function templateFileWriter( test )
   provider.filesDelete( testPath );
   var writer = _.TemplateFileWriter
   ({
-    template : template,
+    template,
     dstProvider : provider,
   });
   writer.form();
@@ -147,7 +148,7 @@ function templateFileWriter( test )
   provider.filesDelete( testPath );
   var writer = _.TemplateFileWriter
   ({
-    template : template,
+    template,
     dstProvider : provider,
     name : 'filename',
   });
@@ -168,7 +169,7 @@ function templateFileWriter( test )
   provider.filesDelete( testPath );
   var writer = _.TemplateFileWriter
   ({
-    srcProvider : srcProvider,
+    srcProvider,
     dstPath : testPath,
     dstProvider : provider,
   });
@@ -183,7 +184,7 @@ function templateFileWriter( test )
   provider.filesDelete( testPath );
   var writer = _.TemplateFileWriter
   ({
-    srcProvider : srcProvider,
+    srcProvider,
     dstPath : testPath,
     dstProvider : provider,
     name : 'filename',
@@ -199,7 +200,7 @@ function templateFileWriter( test )
   provider.filesDelete( testPath );
   var writer = _.TemplateFileWriter
   ({
-    srcProvider : srcProvider,
+    srcProvider,
     dstProvider : provider,
   });
   writer.form();
@@ -214,7 +215,7 @@ function templateFileWriter( test )
   provider.filesDelete( testPath );
   var writer = _.TemplateFileWriter
   ({
-    srcProvider : srcProvider,
+    srcProvider,
     dstProvider : provider,
     name : 'filename',
   });
@@ -234,7 +235,7 @@ function templateFileWriter( test )
   };
   var writer = _.TemplateFileWriter
   ({
-    template : template,
+    template,
     dstPath : testPath,
     dstProvider : provider,
   });
@@ -252,13 +253,13 @@ function templateFileWriter( test )
   {
     file : '{{name }}, {{lowName}}, {{highName}}'
   };
-  var configGet = function()
+  function configGet()
   {
     return { name : 'File', lowName : 'file', highName : 'FILE' };
   }
   var writer = _.TemplateFileWriter
   ({
-    template : template,
+    template,
     dstPath : testPath,
     dstProvider : provider,
     onConfigGet : configGet,
@@ -274,16 +275,16 @@ function templateFileWriter( test )
   {
     file : '{{any.key}} : {{any.value}}'
   };
-  var configGet = function()
+  function configGet2()
   {
     return { 'any.key' : 'key', 'any.value' : 'value' };
   }
   var writer = _.TemplateFileWriter
   ({
-    template : template,
+    template,
     dstPath : testPath,
     dstProvider : provider,
-    onConfigGet : configGet,
+    onConfigGet : configGet2,
   });
   writer.form();
   var got = provider.fileRead( testPath + '/file' );
@@ -301,7 +302,7 @@ function templateFileWriter( test )
     var write = _.templateFileWriter
     ({
       dstProvider : provider,
-      template : template,
+      template,
     });
     write.form( template );
   });
@@ -312,7 +313,7 @@ function templateFileWriter( test )
     var write = _.templateFileWriter
     ({
       srcProvider : provider,
-      template : template,
+      template,
     });
     write.form();
   });
@@ -334,7 +335,7 @@ function templateFileWriter( test )
     var write = _.templateFileWriter
     ({
       srcProvider : _.fileProvider,
-      template : template,
+      template,
     });
     write.form();
   });
@@ -349,9 +350,9 @@ function templateFileWriterLinks( test )
   let provider = context.provider;
   let testPath = context.suiteTempPath;
 
-  var templateFile = "let Self = { file : 'Content of file' };\
+  var templateFile = `let Self = { file : 'Content of file' };\
                      \nif( typeof module !== 'undefined' )\
-                     \nmodule[ 'exports' ] = Self;";
+                     \nmodule[ 'exports' ] = Self;`;
 
   /* test, srcTemplatePath */
 
@@ -510,7 +511,7 @@ function templateFileWriterLinks( test )
   var customTemplate = pathToTemp + '/Template.s';
   var textlink = pathToTemp + '/textlink';
   _.fileProvider.fileWrite( customTemplate, templateFile );
-  _.fileProvider.textLink( { dstPath : textlink, srcPath : '../Template.s'} );
+  _.fileProvider.textLink( { dstPath : textlink, srcPath : '../Template.s' } );
   _.fileProvider.fieldPush( 'usingTextLink', 1 );
   var pathResolved = _.fileProvider.pathResolveTextLink( { filePath : textlink } );
   var writer = _.TemplateFileWriter
