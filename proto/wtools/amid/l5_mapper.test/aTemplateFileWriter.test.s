@@ -33,8 +33,9 @@ function onSuiteBegin( test )
 function onSuiteEnd()
 {
   let path = this.provider.path;
-  _.assert( _.strHas( this.suiteTempPath, 'tmp.tmp' ) );
-  path.tempClose( this.suiteTempPath );
+  // _.assert( _.strHas( this.suiteTempPath.filePath, 'tmp.tmp' ) );
+  // _.assert( _.strHas( this.suiteTempPath.filePath, 'suite-TemplateFileWriter' ) );
+  path.tempClose( this.suiteTempPath.filePath );
   this.provider.finit();
 }
 
@@ -55,7 +56,7 @@ function templateFileWriter( test )
 {
   let context = this;
   let provider = context.provider;
-  let testPath = context.suiteTempPath;
+  let testPath = context.suiteTempPath.filePath;
 
   var template =
   {
@@ -82,7 +83,7 @@ function templateFileWriter( test )
   var writer = _.TemplateFileWriter
   ({
     template,
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
   });
   writer.form();
@@ -98,12 +99,12 @@ function templateFileWriter( test )
 
   /* test, template */
 
-  test.case = 'template, dstPath, dstProvider, base test';
+  test.case = 'template, dst, dstProvider, base test';
   provider.filesDelete( testPath );
   var writer = _.TemplateFileWriter
   ({
     template,
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
   });
   writer.form();
@@ -113,11 +114,11 @@ function templateFileWriter( test )
 
   //
 
-  test.case = 'template, dstPath, dstProvider, name, base test';
+  test.case = 'template, dst, dstProvider, name, base test';
   provider.filesDelete( testPath );
   var writer = _.TemplateFileWriter
   ({
-    dstPath : testPath,
+    dst : testPath,
     template,
     dstProvider : provider,
     name : 'filename',
@@ -129,7 +130,7 @@ function templateFileWriter( test )
 
   //
 
-  test.case = 'template, without dstPath';
+  test.case = 'template, without dst';
   provider.filesDelete( testPath );
   var writer = _.TemplateFileWriter
   ({
@@ -144,7 +145,7 @@ function templateFileWriter( test )
 
   //
 
-  test.case = 'template, without dstPath, name';
+  test.case = 'template, without dst, name';
   provider.filesDelete( testPath );
   var writer = _.TemplateFileWriter
   ({
@@ -165,12 +166,12 @@ function templateFileWriter( test )
     filesTree : template,
   });
 
-  test.case = 'srcProvider - instance of Extract, dstPath, dstProvider';
+  test.case = 'srcProvider - instance of Extract, dst, dstProvider';
   provider.filesDelete( testPath );
   var writer = _.TemplateFileWriter
   ({
     srcProvider,
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
   });
   writer.form();
@@ -180,12 +181,12 @@ function templateFileWriter( test )
 
   //
 
-  test.case = 'srcProvider - instance of Extract, dstPath, dstProvider, name';
+  test.case = 'srcProvider - instance of Extract, dst, dstProvider, name';
   provider.filesDelete( testPath );
   var writer = _.TemplateFileWriter
   ({
     srcProvider,
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
     name : 'filename',
   });
@@ -236,7 +237,7 @@ function templateFileWriter( test )
   var writer = _.TemplateFileWriter
   ({
     template,
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
   });
   writer.form();
@@ -260,7 +261,7 @@ function templateFileWriter( test )
   var writer = _.TemplateFileWriter
   ({
     template,
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
     onConfigGet : configGet,
   });
@@ -282,7 +283,7 @@ function templateFileWriter( test )
   var writer = _.TemplateFileWriter
   ({
     template,
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
     onConfigGet : configGet2,
   });
@@ -348,7 +349,7 @@ function templateFileWriterLinks( test )
 {
   let context = this;
   let provider = context.provider;
-  let testPath = context.suiteTempPath;
+  let testPath = context.suiteTempPath.filePath;
 
   var templateFile = `let Self = { file : 'Content of file' };\
                      \nif( typeof module !== 'undefined' )\
@@ -356,13 +357,13 @@ function templateFileWriterLinks( test )
 
   /* test, srcTemplatePath */
 
-  test.case = 'without srcTemplatePath, dstPath, dstProvider';
+  test.case = 'without srcTemplatePath, dst, dstProvider';
   provider.filesDelete( testPath );
   var defaultTemplate = _.path.current() + '/Template.s';
   _.fileProvider.fileWrite( defaultTemplate, templateFile );
   var writer = _.TemplateFileWriter
   ({
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
   });
   writer.form();
@@ -373,7 +374,7 @@ function templateFileWriterLinks( test )
 
   //
 
-  test.case = 'srcTemplatePath is hard link, dstPath, dstProvider';
+  test.case = 'srcTemplatePath is hard link, dst, dstProvider';
   provider.filesDelete( testPath );
   var pathToTemp = _.fileProvider.path.tempOpen( 'tmp.tmp' );
   var customTemplate = pathToTemp + '/Template.s';
@@ -381,7 +382,7 @@ function templateFileWriterLinks( test )
   var writer = _.TemplateFileWriter
   ({
     srcTemplatePath : customTemplate,
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
   });
   writer.form();
@@ -392,7 +393,7 @@ function templateFileWriterLinks( test )
 
   //
 
-  test.case = 'srcTemplatePath is soft link, dstPath, dstProvider';
+  test.case = 'srcTemplatePath is soft link, dst, dstProvider';
   provider.filesDelete( testPath );
   var pathToTemp = _.fileProvider.path.tempOpen( 'tmp.tmp' );
   var customTemplate = pathToTemp + '/Template.s';
@@ -402,7 +403,7 @@ function templateFileWriterLinks( test )
   var writer = _.TemplateFileWriter
   ({
     srcTemplatePath : softlink,
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
   });
   writer.form();
@@ -413,7 +414,7 @@ function templateFileWriterLinks( test )
 
   //
 
-  test.case = 'srcTemplatePath is double soft link, dstPath, dstProvider';
+  test.case = 'srcTemplatePath is double soft link, dst, dstProvider';
   provider.filesDelete( testPath );
   var pathToTemp = _.fileProvider.path.tempOpen( 'tmp.tmp' );
   var customTemplate = pathToTemp + '/Template.s';
@@ -424,7 +425,7 @@ function templateFileWriterLinks( test )
   var writer = _.TemplateFileWriter
   ({
     srcTemplatePath : pathToTemp + '/softlink2',
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
   });
   writer.form();
@@ -446,7 +447,7 @@ function templateFileWriterLinks( test )
   var writer = _.TemplateFileWriter
   ({
     srcTemplatePath : pathToTemp + '/softlink2',
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
   });
   writer.form();
@@ -457,7 +458,7 @@ function templateFileWriterLinks( test )
 
   /* test, text links */
 
-  test.case = 'srcTemplatePath is text link, dstPath, dstProvider';
+  test.case = 'srcTemplatePath is text link, dst, dstProvider';
   provider.filesDelete( testPath );
   var pathToTemp = _.fileProvider.path.tempOpen( 'tmp.tmp' );
   var customTemplate = pathToTemp + '/Template.s';
@@ -469,7 +470,7 @@ function templateFileWriterLinks( test )
   var writer = _.TemplateFileWriter
   ({
     srcTemplatePath : pathResolved,
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
   });
   writer.form();
@@ -480,7 +481,7 @@ function templateFileWriterLinks( test )
 
   //
 
-  test.case = 'srcTemplatePath is double text link, dstPath, dstProvider';
+  test.case = 'srcTemplatePath is double text link, dst, dstProvider';
   provider.filesDelete( testPath );
   var pathToTemp = _.fileProvider.path.tempOpen( 'tmp.tmp' );
   var customTemplate = pathToTemp + '/Template.s';
@@ -494,7 +495,7 @@ function templateFileWriterLinks( test )
   var writer = _.TemplateFileWriter
   ({
     srcTemplatePath : pathResolved,
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
   });
   writer.form();
@@ -517,7 +518,7 @@ function templateFileWriterLinks( test )
   var writer = _.TemplateFileWriter
   ({
     srcTemplatePath : textlink + '/' + pathResolved,
-    dstPath : testPath,
+    dst : testPath,
     dstProvider : provider,
   });
   writer.form();
@@ -537,7 +538,7 @@ function templateFileWriterLinks( test )
     var write = _.templateFileWriter
     ({
       dstProvider : provider,
-      dstPath : testPath,
+      dst : testPath,
       srcTemplatePath : _.fileProvider.softLink( pathToTemp, testPath ),
     });
     write.form();
@@ -549,7 +550,7 @@ function templateFileWriterLinks( test )
     var write = _.templateFileWriter
     ({
       dstProvider : provider,
-      dstPath : testPath,
+      dst : testPath,
       srcTemplatePath : _.fileProvider.textLink( pathToTemp + '/link', testPath + '/file2.s' ),
     });
     write.form();
