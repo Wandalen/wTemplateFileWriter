@@ -21,7 +21,7 @@ function onSuiteBegin( test )
 {
   let context = this;
   context.provider = _.FileProvider.HardDrive({ protocol : 'current' });
-  context.hub = _.FileProvider.Hub({ providers : [ context.provider ], defaultProvider : context.provider });
+  context.hub = _.FileProvider.System({ providers : [ context.provider ], defaultProvider : context.provider });
   let path = context.provider.path;
   context.suiteTempPath = path.tempOpen( 'suite-TemplateFileWriter' );
   context.suiteTempPath = context.provider.pathResolveLinkFull
@@ -49,6 +49,7 @@ var Proto =
   context :
   {
     suiteTempPath : null,
+    hub : null
   },
 
   tests :
