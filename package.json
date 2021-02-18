@@ -1,6 +1,6 @@
 {
   "name": "wtemplatefilewriter",
-  "version": "0.3.195",
+  "version": "0.3.196",
   "description": "Write template to the file system, instantiating it. ",
   "author": "Kostiantyn Wandalen <wanalen@01.school>",
   "license": "MIT",
