@@ -20,7 +20,7 @@ var writer = new wTemplateFileWriter({ template });
 
 writer.form();
 
-console.log( _.toStr( writer ) );
+console.log( _.entity.exportString( writer ) );
 
 /* log :
 wTemplateFileWriter::
