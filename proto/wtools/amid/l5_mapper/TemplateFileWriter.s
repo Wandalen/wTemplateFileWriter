@@ -108,10 +108,8 @@ function form()
 
   _.assert( self.srcProvider instanceof _.FileProvider.Extract );
 
-  debugger;
   if( self.resolving )
   self.srcProvider.filesTree = self.resolver.resolve( self.srcProvider.filesTree );
-  debugger;
 
   self.srcProvider.filesReflectTo
   ({
