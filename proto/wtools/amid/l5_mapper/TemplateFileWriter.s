@@ -27,10 +27,10 @@ if( typeof module !== 'undefined' )
 
 //
 
-let _global = _global_;
-let _ = _global_.wTools;
-let Parent = null;
-let Self = wTemplateFileWriter;
+const _global = _global_;
+const _ = _global_.wTools;
+const Parent = null;
+const Self = wTemplateFileWriter;
 function wTemplateFileWriter( o )
 {
   return _.workpiece.construct( Self, this, arguments );

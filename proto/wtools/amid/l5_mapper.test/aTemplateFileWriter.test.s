@@ -6,7 +6,7 @@
 if( typeof module !== 'undefined' )
 {
 
-  let _ = require( '../../Tools.s' );
+  const _ = require( '../../Tools.s' );
 
   _.include( 'wTesting' );
 
@@ -16,8 +16,8 @@ if( typeof module !== 'undefined' )
 
 //
 
-let _ = _global_.wTools;
-let Parent = wTester;
+const _ = _global_.wTools;
+const Parent = wTester;
 
 // --
 // context
@@ -70,7 +70,7 @@ function templateFileWriter( test )
       'test2.s' : 'Test file2 content',
     }
   };
-  var templateFile = `let Self = { file : 'Content of file' };\
+  var templateFile = `const Proto = { file : 'Content of file' };\
                      \nif( typeof module !== 'undefined' )\
                      \nmodule[ 'exports' ] = Self;`;
 
@@ -351,7 +351,7 @@ function templateFileWriterLinks( test )
   let provider = context.provider;
   let testPath = context.suiteTempPath.filePath;
 
-  var templateFile = `let Self = { file : 'Content of file' };\
+  var templateFile = `const Proto = { file : 'Content of file' };\
                      \nif( typeof module !== 'undefined' )\
                      \nmodule[ 'exports' ] = Self;`;
 
@@ -561,7 +561,7 @@ function templateFileWriterLinks( test )
 // declare
 // --
 
-let Self =
+const Proto =
 {
 
   name : 'Tools/mid/l5.test/TemplateFileWriter/Abstract',

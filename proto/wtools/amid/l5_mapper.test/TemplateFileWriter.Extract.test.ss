@@ -10,8 +10,8 @@ if( typeof module !== 'undefined' )
 
 //
 
-let _ = _global_.wTools;
-let Parent = wTests[ 'Tools/mid/l5.test/TemplateFileWriter/Abstract' ];
+const _ = _global_.wTools;
+const Parent = wTests[ 'Tools/mid/l5.test/TemplateFileWriter/Abstract' ];
 
 _.assert( !!Parent );
 
@@ -50,7 +50,7 @@ function onSuiteEnd()
 // declare
 // --
 
-var Proto =
+const Proto =
 {
 
   name : 'Tools/mid/l5.test/TemplateFileWriter/Extract',
@@ -69,7 +69,7 @@ var Proto =
 
 //
 
-let Self = new wTestSuite( Proto ).inherit( Parent );
+const Self = wTestSuite( Proto ).inherit( Parent );
 if( typeof module !== 'undefined' && !module.parent )
 wTester.test( Self.name );
 
