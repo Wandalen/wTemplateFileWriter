@@ -1,22 +1,40 @@
 {
-  "name" : "wtemplatefilewriter",
-  "version" : "0.3.205",
-  "description" : "Write template to the file system, instantiating it. ",
-  "author" : "Kostiantyn Wandalen <wanalen@01.school>",
-  "license" : "MIT",
-  "main" : "proto/wtools/amid/l5_mapper/TemplateFileWriter.s",
-  "files" : [ "proto/wtools/amid/l5_mapper", "proto/wtools/Tools.s", "out" ],
-  "scripts" : { "test" : "wtest .run 'proto/**' rapidity:-3", "docgen" : "wdocgen proto" },
-  "repository" :
-  {
-    "type" : "git",
-    "url" : "https://github.com/Wandalen/wTemplateFileWriter.git"
+  "name": "wtemplatefilewriter",
+  "version": "0.3.206",
+  "description": "Write template to the file system, instantiating it. ",
+  "author": "Kostiantyn Wandalen <wanalen@01.school>",
+  "license": "MIT",
+  "main": "proto/wtools/amid/l5_mapper/TemplateFileWriter.s",
+  "files": [
+    "proto/wtools/amid/l5_mapper",
+    "proto/wtools/Tools.s",
+    "out"
+  ],
+  "scripts": {
+    "test": "wtest .run 'proto/**' rapidity:-3",
+    "docgen": "wdocgen proto"
   },
-  "bugs" :
-  {
-    "url" : "https://github.com/Wandalen/wTemplateFileWriter/issues"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Wandalen/wTemplateFileWriter.git"
   },
-  "dependencies" : { "wTools" : "", "wtemplatetreeresolver" : "", "wFiles" : "" },
-  "devDependencies" : { "wTesting" : "", "eslint" : "7.1.0", "wtemplatefilewriter" : "file:." },
-  "keywords" : [ "wTools", "template", "instantiating template", "file system" ]
+  "bugs": {
+    "url": "https://github.com/Wandalen/wTemplateFileWriter/issues"
+  },
+  "dependencies": {
+    "wTools": "delta",
+    "wtemplatetreeresolver": "delta",
+    "wFiles": "delta"
+  },
+  "devDependencies": {
+    "eslint": "7.1.0",
+    "wTesting": "delta",
+    "wtemplatefilewriter": "file:."
+  },
+  "keywords": [
+    "wTools",
+    "template",
+    "instantiating template",
+    "file system"
+  ]
 }
