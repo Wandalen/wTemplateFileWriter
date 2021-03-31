@@ -1,6 +1,6 @@
 {
   "name": "wtemplatefilewriter",
-  "version": "0.3.207",
+  "version": "0.3.208",
   "description": "Write template to the file system, instantiating it. ",
   "author": "Kostiantyn Wandalen <wanalen@01.school>",
   "license": "MIT",
@@ -8,7 +8,8 @@
   "files": [
     "proto/wtools/amid/l5_mapper",
     "proto/wtools/Tools.s",
-    "out"
+    "out",
+    "proto/node_modules"
   ],
   "scripts": {
     "test": "wtest .run 'proto/**' rapidity:-3",
@@ -28,8 +29,7 @@
   },
   "devDependencies": {
     "eslint": "7.1.0",
-    "wTesting": "delta",
-    "wtemplatefilewriter": "file:."
+    "wTesting": "delta"
   },
   "keywords": [
     "wTools",
