@@ -78,9 +78,8 @@ path:
       raw: compiled
       content: prime
   npm.proto.entry:
-    - >-
-      /pro/module/wTemplateFileWriter/proto/wtools/amid/l5_mapper/TemplateFileWriter.s
-    - /pro/module/wTemplateFileWriter/proto/node_modules/wtemplatefilewriter
+    - proto/wtools/amid/l5_mapper/TemplateFileWriter.s
+    - proto/node_modules/wtemplatefilewriter
 reflector:
   reflect.proto:
     inherit: predefined.*
