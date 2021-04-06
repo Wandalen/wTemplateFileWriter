@@ -1,11 +1,11 @@
 {
   "name" : "wtemplatefilewriter",
-  "version" : "0.3.212",
+  "version" : "0.3.213",
   "description" : "Write template to the file system, instantiating it. ",
   "author" : "Kostiantyn Wandalen <wanalen@01.school>",
   "license" : "MIT",
   "main" : "proto/node_modules/wtemplatefilewriter",
-  "files" : [ "proto/wtools/amid/l5_mapper", "proto/wtools/Tools.s", "out", "proto/node_modules" ],
+  "files" : [ "proto/wtools/amid/l5_mapper", "out", "proto/node_modules" ],
   "scripts" : { "test" : "wtest .run 'proto/**' rapidity:-3", "docgen" : "wdocgen proto" },
   "repository" :
   {
